@@ -108,6 +108,9 @@
       /* Background */
       --color-background: {{ background_color }};
       --color-background-rgb: {{ background_color.rgb }};
+      --color-bg-page: var(--color-background);
+      --color-bg-base: var(--color-background);
+      --color-surface-card: var(--color-background);
 
       /* Opacity values adjusted for background brightness */
       {% render 'brightness-opacities', background: background_color %}
@@ -122,6 +125,8 @@
         --color-foreground-subdued: rgb({{ effective_text_color_rgb }} / var(--opacity-subdued-text));
         --color-border: {{ effective_border_color }};
         --color-border-rgb: {{ effective_border_color_rgb }};
+        --color-text-primary: var(--color-foreground);
+        --color-border-base: var(--color-border);
       {% endunless %}
     }
 
@@ -161,10 +166,12 @@
       --color-foreground-rgb: {{ text_color.rgb }};
       --color-foreground-muted: rgb({{ text_color.rgb }} / var(--opacity-muted-text));
       --color-foreground-subdued: rgb({{ text_color.rgb }} / var(--opacity-subdued-text));
+      --color-text-primary: var(--color-foreground);
 
       {% if preset == 'ui' %}
         --color-border: {{ effective_no_bg_border }};
         --color-border-rgb: {{ effective_no_bg_border_rgb }};
+        --color-border-base: var(--color-border);
       {% endif %}
 
     }
