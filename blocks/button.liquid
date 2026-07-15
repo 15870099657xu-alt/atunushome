@@ -1,5 +1,74 @@
 
-{% render 'button', link: block.settings.link %}
+{% liquid
+  assign block_settings = block.settings
+  assign button_icon = block_settings.icon | default: 'none'
+  assign icon_position = block_settings.icon_position | default: 'after'
+  assign button_height = block_settings.button_height | default: 48
+%}
+
+{% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
+
+<a
+  {% if block_settings.link == blank %}
+    role="link"
+    aria-disabled="true"
+  {% else %}
+    href="{{ block_settings.link }}"
+  {% endif %}
+  class="
+    button-block
+    button-block--icon-{{ icon_position }}
+    size-style
+    {{ block_settings.style_class }}
+    {{ block_settings.style_class }}--{{ block.id }}
+  "
+  style="{% render 'size-style', settings: block_settings %} --button-block-min-height: {{ button_height }}px;"
+  {% if block_settings.open_in_new_tab %}
+    target="_blank"
+    rel="noopener noreferrer"
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  {% if button_icon != 'none' %}
+    <span class="button-block__icon">
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        viewBox="0 0 20 20"
+      >
+        {% render 'icon', icon: button_icon %}
+      </svg>
+    </span>
+  {% endif %}
+  <span class="button-block__label">{{ block_settings.label }}</span>
+</a>
+
+{% stylesheet %}
+  .button-block.button-block {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-sm);
+    min-height: var(--button-block-min-height, 48px);
+  }
+
+  .button-block--icon-after .button-block__icon {
+    order: 2;
+  }
+
+  .button-block__icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+
+  .button-block__icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -22,6 +91,71 @@
       "id": "open_in_new_tab",
       "label": "t:settings.open_new_tab",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "arrow",
+          "label": "t:options.arrow"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.heart"
+        },
+        {
+          "value": "leaf",
+          "label": "t:options.leaf"
+        },
+        {
+          "value": "lock",
+          "label": "t:options.lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "t:options.map_pin"
+        },
+        {
+          "value": "price_tag",
+          "label": "t:options.price_tag"
+        },
+        {
+          "value": "return",
+          "label": "t:options.return"
+        },
+        {
+          "value": "star",
+          "label": "t:options.star"
+        },
+        {
+          "value": "truck",
+          "label": "t:options.truck"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "icon_position",
+      "label": "t:settings.position",
+      "options": [
+        {
+          "value": "before",
+          "label": "Before"
+        },
+        {
+          "value": "after",
+          "label": "After"
+        }
+      ],
+      "default": "after",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
     },
     {
       "type": "select",
@@ -87,6 +221,16 @@
     {
       "type": "header",
       "content": "t:content.size"
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "label": "t:settings.height",
+      "min": 36,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 48
     },
     {
       "type": "select",
