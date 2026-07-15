@@ -10,8 +10,9 @@
 {
   "current": {
     "logo": "shopify://shop_images/Logo.svg",
-    "logo_height": 36,
-    "logo_height_mobile": 28,
+    "logo_height": 20,
+    "logo_height_mobile": 14,
+    "favicon": "shopify://shop_images/Favicon.png",
     "page_text_color": "#2A2926",
     "type_body_font": "archivo_n4",
     "type_subheading_font": "libre_franklin_n5",
