@@ -2,6 +2,7 @@
 {% liquid
   assign block_settings = block.settings
   assign button_icon = block_settings.icon | default: 'none'
+  assign lucide_icon = block_settings.lucide_icon | handleize
   assign icon_position = block_settings.icon_position | default: 'after'
   assign button_height = block_settings.button_height | default: 48
 %}
@@ -29,7 +30,23 @@
   {% endif %}
   {{ block.shopify_attributes }}
 >
-  {% if button_icon != 'none' %}
+  {% if lucide_icon != blank %}
+    <span class="button-block__icon">
+      <svg
+        class="button-block__icon-svg--lucide"
+        aria-hidden="true"
+        focusable="false"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <use href="{{ 'lucide-icons.svg' | asset_url }}#{{ lucide_icon }}"></use>
+      </svg>
+    </span>
+  {% elsif button_icon != 'none' %}
     <span class="button-block__icon">
       <svg
         aria-hidden="true"
@@ -67,6 +84,11 @@
     width: 100%;
     height: 100%;
     fill: currentColor;
+  }
+
+  .button-block__icon svg.button-block__icon-svg--lucide {
+    fill: none;
+    stroke: currentColor;
   }
 {% endstylesheet %}
 
@@ -141,6 +163,12 @@
       "default": "none"
     },
     {
+      "type": "text",
+      "id": "lucide_icon",
+      "label": "Lucide icon name",
+      "info": "Search at https://lucide.dev/icons/ and enter the URL slug, for example: shopping-cart. This overrides the theme icon above."
+    },
+    {
       "type": "select",
       "id": "icon_position",
       "label": "t:settings.position",
@@ -155,7 +183,7 @@
         }
       ],
       "default": "after",
-      "visible_if": "{{ block.settings.icon != 'none' }}"
+      "visible_if": "{{ block.settings.icon != 'none' or block.settings.lucide_icon != blank }}"
     },
     {
       "type": "select",
