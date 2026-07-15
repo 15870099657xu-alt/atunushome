@@ -1,9 +1,69 @@
 
 {% liquid
   assign block_settings = block.settings
-  assign button_icon = block_settings.icon | default: 'none'
+  assign legacy_button_icon = block_settings.icon | default: 'none'
   assign icon_position = block_settings.icon_position | default: 'after'
-  assign button_height = block_settings.button_height | default: 48
+  assign icon_default_source = block_settings.icon_default_source
+  assign icon_default_theme = block_settings.icon_default_theme | default: 'none'
+  assign icon_hover_source = block_settings.icon_hover_source | default: 'same_as_default'
+  assign icon_hover_theme = block_settings.icon_hover_theme | default: 'none'
+  assign default_icon_type = 'none'
+  assign hover_icon_type = 'none'
+
+  if icon_default_source == blank
+    if legacy_button_icon != 'none'
+      assign icon_default_source = 'theme_icon'
+      assign icon_default_theme = legacy_button_icon
+    else
+      assign icon_default_source = 'none'
+    endif
+  endif
+
+  case icon_default_source
+    when 'theme_icon'
+      if icon_default_theme == 'none' and legacy_button_icon != 'none'
+        assign icon_default_theme = legacy_button_icon
+      endif
+      if icon_default_theme != 'none'
+        assign default_icon_type = 'theme_icon'
+      endif
+    when 'custom_image'
+      if block_settings.icon_default_image != blank
+        assign default_icon_type = 'custom_image'
+        assign default_icon_image = block_settings.icon_default_image
+      endif
+  endcase
+
+  case icon_hover_source
+    when 'none'
+      assign hover_icon_type = 'none'
+    when 'theme_icon'
+      if icon_hover_theme != 'none'
+        assign hover_icon_type = 'theme_icon'
+      else
+        assign hover_icon_type = default_icon_type
+        assign icon_hover_theme = icon_default_theme
+        assign hover_icon_image = default_icon_image
+      endif
+    when 'custom_image'
+      if block_settings.icon_hover_image != blank
+        assign hover_icon_type = 'custom_image'
+        assign hover_icon_image = block_settings.icon_hover_image
+      else
+        assign hover_icon_type = default_icon_type
+        assign icon_hover_theme = icon_default_theme
+        assign hover_icon_image = default_icon_image
+      endif
+    else
+      assign hover_icon_type = default_icon_type
+      assign icon_hover_theme = icon_default_theme
+      assign hover_icon_image = default_icon_image
+  endcase
+
+  assign has_icon = false
+  if default_icon_type != 'none' or hover_icon_type != 'none'
+    assign has_icon = true
+  endif
 %}
 
 {% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
@@ -18,26 +78,54 @@
   class="
     button-block
     button-block--icon-{{ icon_position }}
+    {% if has_icon %}button-block--has-icon{% endif %}
     size-style
     {{ block_settings.style_class }}
     {{ block_settings.style_class }}--{{ block.id }}
   "
-  style="{% render 'size-style', settings: block_settings %} --button-block-min-height: {{ button_height }}px;"
+  style="{% render 'size-style', settings: block_settings %} --button-padding-top: {{ block_settings.padding_top | default: 12 }}px; --button-padding-right: {{ block_settings.padding_right | default: 20 }}px; --button-padding-bottom: {{ block_settings.padding_bottom | default: 12 }}px; --button-padding-left: {{ block_settings.padding_left | default: 20 }}px; --button-icon-size: {{ block_settings.icon_size | default: 18 }}px;"
   {% if block_settings.open_in_new_tab %}
     target="_blank"
     rel="noopener noreferrer"
   {% endif %}
   {{ block.shopify_attributes }}
 >
-  {% if button_icon != 'none' %}
-    <span class="button-block__icon">
-      <svg
-        aria-hidden="true"
-        focusable="false"
-        viewBox="0 0 20 20"
-      >
-        {% render 'icon', icon: button_icon %}
-      </svg>
+  {% if has_icon %}
+    <span class="button-block__icon" aria-hidden="true">
+      <span class="button-block__icon-layer button-block__icon-layer--default">
+        {% if default_icon_type == 'theme_icon' %}
+          <svg focusable="false" viewBox="0 0 20 20" preserveAspectRatio="xMidYMid meet">
+            {% render 'icon', icon: icon_default_theme %}
+          </svg>
+        {% elsif default_icon_type == 'custom_image' %}
+          {{
+            default_icon_image
+            | image_url: width: 64
+            | image_tag:
+              widths: '32, 64',
+              sizes: '32px',
+              class: 'button-block__icon-image',
+              alt: ''
+          }}
+        {% endif %}
+      </span>
+      <span class="button-block__icon-layer button-block__icon-layer--hover">
+        {% if hover_icon_type == 'theme_icon' %}
+          <svg focusable="false" viewBox="0 0 20 20" preserveAspectRatio="xMidYMid meet">
+            {% render 'icon', icon: icon_hover_theme %}
+          </svg>
+        {% elsif hover_icon_type == 'custom_image' %}
+          {{
+            hover_icon_image
+            | image_url: width: 64
+            | image_tag:
+              widths: '32, 64',
+              sizes: '32px',
+              class: 'button-block__icon-image',
+              alt: ''
+          }}
+        {% endif %}
+      </span>
     </span>
   {% endif %}
   <span class="button-block__label">{{ block_settings.label }}</span>
@@ -49,7 +137,8 @@
     align-items: center;
     justify-content: center;
     gap: var(--gap-sm);
-    min-height: var(--button-block-min-height, 48px);
+    padding: var(--button-padding-top) var(--button-padding-right) var(--button-padding-bottom)
+      var(--button-padding-left);
   }
 
   .button-block--icon-after .button-block__icon {
@@ -57,16 +146,66 @@
   }
 
   .button-block__icon {
-    display: inline-flex;
-    flex: 0 0 auto;
-    width: var(--icon-size-sm);
-    height: var(--icon-size-sm);
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+  }
+
+  .button-block__icon-layer {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+    transition: opacity var(--animation-speed) var(--animation-easing),
+      visibility var(--animation-speed) var(--animation-easing);
+  }
+
+  .button-block__icon-layer--default {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .button-block__icon-layer--hover {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .button-block__icon svg,
+  .button-block__icon-image {
+    display: block;
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   .button-block__icon svg {
-    width: 100%;
-    height: 100%;
     fill: currentColor;
+  }
+
+  .button-block:not([aria-disabled='true']):not(:disabled):focus-visible .button-block__icon-layer--default {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .button-block:not([aria-disabled='true']):not(:disabled):focus-visible .button-block__icon-layer--hover {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .button-block:not([aria-disabled='true']):not(:disabled):hover .button-block__icon-layer--default {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .button-block:not([aria-disabled='true']):not(:disabled):hover .button-block__icon-layer--hover {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 {% endstylesheet %}
 
@@ -138,7 +277,162 @@
           "label": "t:options.truck"
         }
       ],
+      "default": "none",
+      "visible_if": "{{ block.settings.icon_default_source == 'legacy' }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_default_source",
+      "label": "Default icon source",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "theme_icon",
+          "label": "Theme icon"
+        },
+        {
+          "value": "custom_image",
+          "label": "Custom image"
+        }
+      ],
       "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "icon_default_theme",
+      "label": "Default theme icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "arrow",
+          "label": "t:options.arrow"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.heart"
+        },
+        {
+          "value": "leaf",
+          "label": "t:options.leaf"
+        },
+        {
+          "value": "lock",
+          "label": "t:options.lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "t:options.map_pin"
+        },
+        {
+          "value": "price_tag",
+          "label": "t:options.price_tag"
+        },
+        {
+          "value": "return",
+          "label": "t:options.return"
+        },
+        {
+          "value": "star",
+          "label": "t:options.star"
+        },
+        {
+          "value": "truck",
+          "label": "t:options.truck"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.icon_default_source == 'theme_icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_default_image",
+      "label": "Default icon image",
+      "visible_if": "{{ block.settings.icon_default_source == 'custom_image' }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_hover_source",
+      "label": "Hover icon source",
+      "options": [
+        {
+          "value": "same_as_default",
+          "label": "Same as default"
+        },
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "theme_icon",
+          "label": "Theme icon"
+        },
+        {
+          "value": "custom_image",
+          "label": "Custom image"
+        }
+      ],
+      "default": "same_as_default"
+    },
+    {
+      "type": "select",
+      "id": "icon_hover_theme",
+      "label": "Hover theme icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "arrow",
+          "label": "t:options.arrow"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.heart"
+        },
+        {
+          "value": "leaf",
+          "label": "t:options.leaf"
+        },
+        {
+          "value": "lock",
+          "label": "t:options.lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "t:options.map_pin"
+        },
+        {
+          "value": "price_tag",
+          "label": "t:options.price_tag"
+        },
+        {
+          "value": "return",
+          "label": "t:options.return"
+        },
+        {
+          "value": "star",
+          "label": "t:options.star"
+        },
+        {
+          "value": "truck",
+          "label": "t:options.truck"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.icon_hover_source == 'theme_icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_hover_image",
+      "label": "Hover icon image",
+      "visible_if": "{{ block.settings.icon_hover_source == 'custom_image' }}"
     },
     {
       "type": "select",
@@ -154,8 +448,17 @@
           "label": "After"
         }
       ],
-      "default": "after",
-      "visible_if": "{{ block.settings.icon != 'none' }}"
+      "default": "after"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
     },
     {
       "type": "select",
@@ -224,13 +527,54 @@
     },
     {
       "type": "range",
+      "id": "padding_top",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "Padding right",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Padding left",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
       "id": "button_height",
       "label": "t:settings.height",
       "min": 36,
       "max": 64,
       "step": 2,
       "unit": "px",
-      "default": 48
+      "default": 48,
+      "visible_if": "{{ block.settings.icon_default_source == 'legacy' }}"
     },
     {
       "type": "select",
