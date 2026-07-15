@@ -98,15 +98,22 @@
             {% render 'icon', icon: icon_default_theme %}
           </svg>
         {% elsif default_icon_type == 'custom_image' %}
-          {{
-            default_icon_image
-            | image_url: width: 64
-            | image_tag:
-              widths: '32, 64',
-              sizes: '32px',
-              class: 'button-block__icon-image',
-              alt: ''
-          }}
+          {% if default_icon_image.src contains '.svg' %}
+            <span
+              class="button-block__icon-image button-block__icon-image--svg"
+              style="--button-icon-mask-image: url('{{ default_icon_image | image_url: width: 64 }}');"
+            ></span>
+          {% else %}
+            {{
+              default_icon_image
+              | image_url: width: 64
+              | image_tag:
+                widths: '32, 64',
+                sizes: '32px',
+                class: 'button-block__icon-image',
+                alt: ''
+            }}
+          {% endif %}
         {% endif %}
       </span>
       <span class="button-block__icon-layer button-block__icon-layer--hover">
@@ -115,15 +122,22 @@
             {% render 'icon', icon: icon_hover_theme %}
           </svg>
         {% elsif hover_icon_type == 'custom_image' %}
-          {{
-            hover_icon_image
-            | image_url: width: 64
-            | image_tag:
-              widths: '32, 64',
-              sizes: '32px',
-              class: 'button-block__icon-image',
-              alt: ''
-          }}
+          {% if hover_icon_image.src contains '.svg' %}
+            <span
+              class="button-block__icon-image button-block__icon-image--svg"
+              style="--button-icon-mask-image: url('{{ hover_icon_image | image_url: width: 64 }}');"
+            ></span>
+          {% else %}
+            {{
+              hover_icon_image
+              | image_url: width: 64
+              | image_tag:
+                widths: '32, 64',
+                sizes: '32px',
+                class: 'button-block__icon-image',
+                alt: ''
+            }}
+          {% endif %}
         {% endif %}
       </span>
     </span>
@@ -184,6 +198,18 @@
 
   .button-block__icon svg {
     fill: currentColor;
+  }
+
+  .button-block__icon-image--svg {
+    background-color: currentColor;
+    -webkit-mask-image: var(--button-icon-mask-image);
+    mask-image: var(--button-icon-mask-image);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
 
   .button-block:not([aria-disabled='true']):not(:disabled):focus-visible .button-block__icon-layer--default {
