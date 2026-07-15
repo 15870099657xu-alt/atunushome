@@ -1,0 +1,2524 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATUNUS HOME · Updated Color & Typography System</title>
+  <style>
+    :root {
+      --brand-50: #F7F8F2;
+      --brand-100: #EEEFE6;
+      --brand-200: #E2E3D7;
+      --brand-300: #CECEBC;
+      --brand-400: #A9AC99;
+      --brand-700: #565A49;
+      --brand-800: #3D4134;
+      --brand-900: #292D23;
+      --brand-950: #171A13;
+
+      --neutral-50: #FAFAF9;
+      --neutral-100: #F3F3F0;
+      --neutral-200: #E8E7E2;
+      --neutral-300: #D7D5CF;
+      --neutral-700: #56534F;
+      --neutral-900: #2A2926;
+      --neutral-950: #171613;
+
+      --surface: #FFFFFF;
+      --shadow-soft: 0 18px 56px rgba(23, 22, 19, 0.08);
+      --shadow-card: 0 8px 24px rgba(23, 26, 23, 0.06);
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(162, 193, 166, 0.22), transparent 36rem),
+        linear-gradient(180deg, var(--neutral-50), #ffffff 90rem);
+      color: var(--neutral-900);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .shell {
+      width: min(1220px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 84px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 26px;
+      margin-bottom: 28px;
+    }
+
+    .hero-main {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(216, 214, 205, 0.86);
+      border-radius: var(--radius-xl);
+      padding: 44px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow {
+      color: var(--brand-600);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      color: var(--brand-950);
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: var(--neutral-700);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .hero-side {
+      background: var(--brand-600);
+      color: var(--neutral-50);
+      border-radius: var(--radius-xl);
+      padding: 34px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brandmark {
+      letter-spacing: .42em;
+      font-size: 18px;
+      color: var(--neutral-50);
+      white-space: nowrap;
+    }
+
+    .brandmark span { color: var(--brand-400); }
+
+    .quick-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-nav a {
+      color: var(--neutral-50);
+      text-decoration: none;
+      border: 1px solid rgba(250, 250, 246, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+
+    .quick-nav a:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .panel {
+      margin-top: 28px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(216, 214, 205, 0.86);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      padding: 28px 32px 22px;
+      border-bottom: 1px solid var(--neutral-200);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      color: var(--brand-600);
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-head p {
+      max-width: 720px;
+      margin: 8px 0 0;
+      color: var(--neutral-700);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: var(--brand-100);
+      color: var(--brand-600);
+      border: 1px solid var(--brand-200);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .frame-wrap {
+      background: var(--neutral-50);
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      min-height: 760px;
+      border: 0;
+      background: var(--neutral-50);
+    }
+
+    .note {
+      margin-top: 22px;
+      padding: 18px 22px;
+      color: var(--brand-600);
+      background: var(--brand-50);
+      border: 1px solid var(--brand-200);
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-side {
+        padding: 28px;
+      }
+
+      .panel-head {
+        display: block;
+      }
+
+      .tag {
+        margin-top: 14px;
+      }
+
+      .brandmark {
+        white-space: normal;
+      }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .shell { width: 100%; padding: 0; }
+      .hero, .quick-nav { display: none; }
+      .panel {
+        box-shadow: none;
+        border: 0;
+        page-break-inside: avoid;
+      }
+      iframe {
+        min-height: 1200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">ATUNUS HOME / Design System</p>
+        <h1>Updated Color & Typography System</h1>
+        <p class="lead">
+          已将色彩系统 HTML 与 Figma Text Styles HTML 合并为一个单独的 HTML 文件。两个原始页面完整保留在同一文档中，避免样式互相覆盖，同时便于预览、归档和分享。
+        </p>
+      </div>
+      <aside class="hero-side">
+        <div>
+          <div class="brandmark">ATUNUS <span>HOME</span></div>
+          <p style="margin: 22px 0 0; color: var(--neutral-200); font-size: 15px; line-height: 1.65;">
+            Updated palette defines visual atmosphere. Typography defines hierarchy and readability. Together they form the base layer of the ATUNUS HOME design system.
+          </p>
+        </div>
+        <nav class="quick-nav" aria-label="页面导航">
+          <a href="#color-system">01 · Color System</a>
+          <a href="#typography-system">02 · Figma Text Styles</a>
+        </nav>
+      </aside>
+    </header>
+
+    <section class="panel" id="color-system">
+      <div class="panel-head">
+        <div>
+          <h2>01 · Color System</h2>
+          <p>包含 Brand Olive、Brand Neutral、Semantic Token 映射、家具独立站 UI 预览与 CSS token。</p>
+        </div>
+        <span class="tag">Palette HTML</span>
+      </div>
+      <div class="frame-wrap">
+        <iframe title="ATUNUS HOME Color System" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+  &lt;title&gt;ATUNUS HOME Palette Preview&lt;/title&gt;
+  &lt;style&gt;
+    :root {
+      --brand-50: #F7F8F2;
+      --brand-100: #EEEFE6;
+      --brand-200: #E2E3D7;
+      --brand-300: #CECEBC;
+      --brand-400: #A9AC99;
+      --brand-500: #8B8F7C;
+      --brand-600: #707461;
+      --brand-700: #565A49;
+      --brand-800: #3D4134;
+      --brand-900: #292D23;
+      --brand-950: #171A13;
+
+      --neutral-50: #FAFAF9;
+      --neutral-100: #F3F3F0;
+      --neutral-200: #E8E7E2;
+      --neutral-300: #D7D5CF;
+      --neutral-400: #BEBBB4;
+      --neutral-500: #98958F;
+      --neutral-600: #716E69;
+      --neutral-700: #56534F;
+      --neutral-800: #3E3C38;
+      --neutral-900: #2A2926;
+      --neutral-950: #171613;
+
+      /* Semantic UI Tokens */
+      --color-bg-page: #FAFAF9;
+      --color-bg-section: #F3F3F0;
+      --color-bg-Base: #FAFAF9;
+      --color-bg-white: #FFFFFF;
+
+      --color-text-Primary: #2A2926;
+      --color-text-Secondary: #56534F;
+      --color-text-Tertiary: #98958F;
+      --color-text-Inverse: #FAFAF9;
+      --color-text-Brand: #707461;
+
+      --color-border-Base: #D7D5CF;
+      --color-border-Subtle: #E8E7E2;
+      --color-border-Strong: #98958F;
+      --color-border-Brand: #707461;
+
+      --color-sale: #B96A4C;
+
+      /* Action Tokens */
+      --color-action-primary: #707461;
+      --color-action-primary-hover: #565A49;
+      --color-action-primary-active: #3D4134;
+      --color-action-secondary: #EEEFE6;
+      --color-action-secondary-hover: #E2E3D7;
+      --color-action-disabled: #D7D5CF;
+      --color-text-disabled: #BEBBB4;
+
+      /* Surface / Fill Tokens */
+      --color-surface-card: #FFFFFF;
+      --color-surface-subtle: #F3F3F0;
+      --color-surface-muted: #E8E7E2;
+      --color-surface-brand: #F7F8F2;
+      --color-fill-input: #FFFFFF;
+      --color-fill-selected: #EEEFE6;
+
+      /* State Tokens */
+      --color-state-hover: #F3F3F0;
+      --color-state-pressed: #E8E7E2;
+      --color-state-focus: #707461;
+      --color-state-error: #B94A3E;
+      --color-state-success: #707461;
+      --color-state-warning: #B8895A;
+
+      /* Overlay / Shadow Tokens */
+      --color-overlay: rgba(23, 22, 19, 0.48);
+      --color-shadow-soft: rgba(23, 22, 19, 0.08);
+      --color-shadow-strong: rgba(23, 22, 19, 0.16);
+
+      --accent-sale: var(--color-sale);
+      --white: var(--color-bg-white);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 20px 70px var(--color-shadow-soft);
+      --shadow-card: 0 14px 40px var(--color-shadow-soft);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--neutral-50);
+      color: var(--neutral-900);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 80px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--brand-600);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 18px;
+      color: var(--brand-950);
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: .96;
+      letter-spacing: -.06em;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      color: var(--brand-900);
+      font-size: 26px;
+      letter-spacing: -.03em;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: var(--neutral-900);
+      font-size: 18px;
+      letter-spacing: -.02em;
+    }
+
+    .lead {
+      max-width: 700px;
+      margin-bottom: 34px;
+      color: var(--neutral-700);
+      font-size: 18px;
+    }
+
+    .section {
+      margin-top: 56px;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(11, minmax(80px, 1fr));
+      overflow: hidden;
+      border: 1px solid var(--neutral-300);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .swatch {
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 2px;
+      padding: 14px;
+      border-right: 1px solid rgba(255,255,255,.55);
+      font-size: 12px;
+    }
+
+    .swatch:last-child { border-right: 0; }
+    .swatch.dark { color: var(--neutral-50); }
+    .swatch.light { color: var(--neutral-900); }
+    .swatch .token { font-weight: 800; }
+    .swatch .hex { opacity: .78; font-variant-numeric: tabular-nums; }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .usage-card {
+      min-height: 160px;
+      padding: 22px;
+      background: var(--color-surface-card);
+      border: 1px solid var(--neutral-300);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .usage-card p {
+      margin-bottom: 0;
+      color: var(--neutral-600);
+      font-size: 14px;
+    }
+
+    .preview-shell {
+      overflow: hidden;
+      background: var(--color-surface-card);
+      border: 1px solid var(--neutral-300);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 28px;
+      background: rgba(250,250,246,.76);
+      border-bottom: 1px solid var(--neutral-300);
+      backdrop-filter: blur(16px);
+    }
+
+    .logo {
+      color: var(--brand-900);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .36em;
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--brand-500); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: var(--neutral-700);
+      font-size: 14px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border-Base);
+      border-radius: 999px;
+      color: var(--brand-900);
+      font-weight: 700;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      min-height: 520px;
+      background:
+        radial-gradient(circle at 74% 20%, rgba(162,193,166,.38), transparent 36%),
+        linear-gradient(135deg, var(--neutral-50), var(--brand-100));
+    }
+
+    .hero-copy {
+      padding: 68px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-copy h2 {
+      max-width: 520px;
+      margin-bottom: 20px;
+      color: var(--brand-950);
+      font-size: clamp(34px, 4.5vw, 58px);
+      line-height: 1;
+      letter-spacing: -.055em;
+    }
+
+    .hero-copy p {
+      max-width: 500px;
+      margin-bottom: 30px;
+      color: var(--neutral-700);
+      font-size: 17px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--color-action-primary);
+      color: var(--color-text-Inverse);
+      border: 1px solid var(--color-action-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-action-primary-hover);
+      border-color: var(--color-action-primary-hover);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.44);
+      color: var(--brand-900);
+      border: 1px solid var(--brand-400);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: 42px;
+    }
+
+    .product-stage {
+      position: relative;
+      width: min(390px, 90%);
+      aspect-ratio: 1 / 1.16;
+      background: linear-gradient(180deg, var(--neutral-50), var(--neutral-100));
+      border: 1px solid var(--neutral-300);
+      border-radius: 36px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .table-top {
+      position: absolute;
+      left: 21%;
+      top: 24%;
+      width: 58%;
+      height: 7%;
+      background: var(--neutral-950);
+      border-radius: 4px;
+      transform: perspective(300px) rotateX(10deg);
+    }
+
+    .leg {
+      position: absolute;
+      width: 7px;
+      height: 43%;
+      background: var(--neutral-950);
+      border-radius: 999px;
+      transform-origin: top;
+    }
+
+    .leg.a { left: 24%; top: 30%; transform: rotate(-2deg); }
+    .leg.b { right: 24%; top: 30%; transform: rotate(2deg); }
+    .leg.c { left: 35%; top: 31%; transform: rotate(4deg); background: var(--neutral-800); }
+    .leg.d { right: 35%; top: 31%; transform: rotate(-4deg); background: var(--neutral-800); }
+
+    .floor-line {
+      position: absolute;
+      left: 17%;
+      right: 17%;
+      bottom: 22%;
+      height: 2px;
+      background: var(--neutral-300);
+    }
+
+    .floating-card {
+      position: absolute;
+      left: -26px;
+      bottom: 44px;
+      width: 210px;
+      padding: 16px;
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--neutral-300);
+      border-radius: 22px;
+      box-shadow: 0 16px 50px rgba(23, 22, 19, .14);
+      backdrop-filter: blur(14px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      background: var(--brand-100);
+      color: var(--brand-700);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .price {
+      margin-bottom: 4px;
+      color: var(--accent-sale);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+
+    .price small {
+      color: var(--neutral-500);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: line-through;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 28px;
+      background: var(--color-surface-card);
+    }
+
+    .product-card {
+      overflow: hidden;
+      background: var(--neutral-50);
+      border: 1px solid var(--neutral-300);
+      border-radius: 24px;
+    }
+
+    .product-image {
+      height: 210px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--brand-100), var(--neutral-50));
+    }
+
+    .chair {
+      width: 88px;
+      height: 116px;
+      position: relative;
+      border: 7px solid var(--brand-900);
+      border-top-width: 10px;
+      border-radius: 10px 10px 24px 24px;
+    }
+
+    .chair:before,
+    .chair:after {
+      content: &quot;&quot;;
+      position: absolute;
+      bottom: -44px;
+      width: 7px;
+      height: 48px;
+      background: var(--brand-900);
+      border-radius: 999px;
+    }
+
+    .chair:before { left: 10px; transform: rotate(8deg); }
+    .chair:after { right: 10px; transform: rotate(-8deg); }
+
+    .console {
+      width: 134px;
+      height: 72px;
+      position: relative;
+      background: var(--brand-800);
+      border-radius: 12px;
+      box-shadow: inset 0 18px 0 rgba(255,255,255,.08);
+    }
+
+    .console:before,
+    .console:after {
+      content: &quot;&quot;;
+      position: absolute;
+      bottom: -50px;
+      width: 9px;
+      height: 54px;
+      background: var(--brand-900);
+      border-radius: 999px;
+    }
+
+    .console:before { left: 18px; }
+    .console:after { right: 18px; }
+
+    .stool {
+      width: 122px;
+      height: 15px;
+      position: relative;
+      background: var(--brand-900);
+      border-radius: 999px;
+    }
+
+    .stool:before,
+    .stool:after {
+      content: &quot;&quot;;
+      position: absolute;
+      top: 13px;
+      width: 8px;
+      height: 72px;
+      background: var(--brand-900);
+      border-radius: 999px;
+    }
+
+    .stool:before { left: 28px; transform: rotate(10deg); }
+    .stool:after { right: 28px; transform: rotate(-10deg); }
+
+    .product-info {
+      padding: 18px;
+    }
+
+    .product-info .meta {
+      margin-bottom: 8px;
+      color: var(--brand-600);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .product-info h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .product-info p {
+      margin-bottom: 18px;
+      color: var(--neutral-600);
+      font-size: 14px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .product-footer strong {
+      color: var(--brand-950);
+      font-size: 18px;
+    }
+
+    .small-btn {
+      padding: 9px 12px;
+      background: var(--brand-600);
+      color: var(--neutral-50);
+      border: 0;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .form-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding: 42px;
+      background: var(--brand-950);
+      color: var(--neutral-50);
+    }
+
+    .form-band h2 { color: var(--neutral-50); }
+    .form-band p { color: var(--neutral-300); }
+
+    .newsletter {
+      align-self: center;
+      padding: 22px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 14px;
+      background: var(--color-fill-input);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--neutral-900);
+      font: inherit;
+    }
+
+    input:focus {
+      outline: 3px solid rgba(162,193,166,.42);
+      border-color: var(--color-state-focus);
+    }
+
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      background: var(--color-surface-card);
+      border: 1px solid var(--neutral-300);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .token-table th,
+    .token-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--neutral-300);
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .token-table th {
+      color: var(--neutral-600);
+      background: var(--neutral-100);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .token-table tr:last-child td { border-bottom: 0; }
+
+    .mini-swatch {
+      width: 42px;
+      height: 28px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      border: 1px solid rgba(23,22,19,.12);
+      border-radius: 8px;
+    }
+
+    .token-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, monospace;
+      color: var(--color-text-Primary);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .css-code {
+      overflow-x: auto;
+      margin: 18px 0 0;
+      padding: 22px;
+      background: var(--neutral-950);
+      color: var(--neutral-50);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    .token-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 22px 0 28px;
+    }
+
+    .token-preview-card {
+      min-height: 170px;
+      padding: 20px;
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-Base);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .token-preview-card p {
+      margin-bottom: 0;
+      color: var(--color-text-Secondary);
+      font-size: 13px;
+    }
+
+    .demo-button-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .demo-button {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .demo-button.primary { background: var(--color-action-primary); color: var(--color-text-Inverse); }
+    .demo-button.hover { background: var(--color-action-primary-hover); color: var(--color-text-Inverse); }
+    .demo-button.secondary { background: var(--color-action-secondary); color: var(--color-text-Brand); }
+    .demo-button.disabled { background: var(--color-action-disabled); color: var(--color-text-disabled); }
+
+    .surface-row,
+    .state-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .surface-chip,
+    .state-chip {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid var(--color-border-Subtle);
+      border-radius: 14px;
+      color: var(--color-text-Secondary);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .overlay-demo {
+      position: relative;
+      overflow: hidden;
+      min-height: 112px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, var(--color-surface-brand), var(--color-surface-muted));
+      border: 1px solid var(--color-border-Base);
+      border-radius: 18px;
+    }
+
+    .overlay-demo:after {
+      content: &quot;Overlay&quot;;
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--color-overlay);
+      color: var(--color-text-Inverse);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+
+    .group-row td {
+      padding-top: 20px;
+      padding-bottom: 10px;
+      color: var(--color-text-Brand);
+      background: var(--color-surface-brand);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 980px) {
+      .palette-grid { grid-template-columns: repeat(4, 1fr); }
+      .usage-grid, .products, .hero, .form-band { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .page { width: min(100% - 24px, 1180px); padding-top: 28px; }
+      .palette-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-copy, .products, .form-band { padding: 24px; }
+      .hero-visual { padding: 24px; }
+      .floating-card { left: 12px; width: 190px; }
+      .input-row { flex-direction: column; }
+      .logo { font-size: 14px; letter-spacing: .28em; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;page&quot;&gt;
+    &lt;p class=&quot;eyebrow&quot;&gt;ATUNUS HOME / Color System&lt;/p&gt;
+    &lt;h1&gt;家具独立站品牌色 &amp; 中性色预览&lt;/h1&gt;
+    &lt;p class=&quot;lead&quot;&gt;这套色阶以暖橄榄、石灰暖灰、暖米白为核心；中性色改为米灰 / 石灰为主，只保留轻微绿调，让页面更干净、更耐看，同时不脱离家具品牌气质。&lt;/p&gt;
+
+    &lt;section class=&quot;section&quot;&gt;
+      &lt;h2&gt;Brand Olive 色阶 50–950&lt;/h2&gt;
+      &lt;div class=&quot;palette-grid&quot; aria-label=&quot;Brand Olive palette&quot;&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--brand-50)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 50&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#F7F8F2&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--brand-100)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 100&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#EEEFE6&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--brand-200)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 200&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#E2E3D7&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--brand-300)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 300&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#CECEBC&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--brand-400)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 400&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#A9AC99&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--brand-500)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 500&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#8B8F7C&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--brand-600)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 600&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#707461&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--brand-700)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 700&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#565A49&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--brand-800)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 800&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#3D4134&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--brand-900)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 900&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#292D23&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--brand-950)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Brand 950&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#171A13&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;section&quot;&gt;
+      &lt;h2&gt;Brand Neutral 色阶 50–950&lt;/h2&gt;
+      &lt;p class=&quot;lead&quot; style=&quot;margin-bottom:18px;font-size:15px;max-width:760px;&quot;&gt;新版 Neutral 降低了绿色占比，从“绿灰”调整为“暖米灰 / 石灰”，Neutral 500 仍保留一点品牌绿调，适合做正文、边框、背景和卡片系统。&lt;/p&gt;
+      &lt;div class=&quot;palette-grid&quot; aria-label=&quot;Brand Neutral palette&quot;&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--neutral-50)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 50&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#FAFAF9&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--neutral-100)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 100&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#F3F3F0&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--neutral-200)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 200&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#E8E7E2&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--neutral-300)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 300&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#D7D5CF&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--neutral-400)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 400&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#BEBBB4&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch light&quot; style=&quot;background:var(--neutral-500)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 500&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#98958F&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--neutral-600)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 600&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#716E69&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--neutral-700)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 700&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#56534F&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--neutral-800)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 800&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#3E3C38&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--neutral-900)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 900&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#2A2926&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;swatch dark&quot; style=&quot;background:var(--neutral-950)&quot;&gt;&lt;span class=&quot;token&quot;&gt;Neutral 950&lt;/span&gt;&lt;span class=&quot;hex&quot;&gt;#171613&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;section&quot;&gt;
+      &lt;h2&gt;UI 使用建议&lt;/h2&gt;
+      &lt;div class=&quot;usage-grid&quot;&gt;
+        &lt;article class=&quot;usage-card&quot;&gt;
+          &lt;h3&gt;页面背景&lt;/h3&gt;
+          &lt;p&gt;&lt;strong&gt;Neutral 50 / 100&lt;/strong&gt;&lt;br&gt;用于独立站大面积背景，避免纯白带来的冷感。&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;usage-card&quot;&gt;
+          &lt;h3&gt;主按钮&lt;/h3&gt;
+          &lt;p&gt;&lt;strong&gt;Brand 600&lt;/strong&gt;&lt;br&gt;用于 Add to Cart、Shop Now、Checkout，作为当前品牌按钮色。Hover 使用 Brand 700，Active 使用 Brand 800。&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;usage-card&quot;&gt;
+          &lt;h3&gt;辅助区域&lt;/h3&gt;
+          &lt;p&gt;&lt;strong&gt;Brand 100 / 400&lt;/strong&gt;&lt;br&gt;用于标签、信息卡、浅色模块和品牌氛围点缀。&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;usage-card&quot;&gt;
+          &lt;h3&gt;文字与边框&lt;/h3&gt;
+          &lt;p&gt;&lt;strong&gt;Neutral 600–900&lt;/strong&gt;&lt;br&gt;用于正文、次级文字、分割线和表单边框。&lt;/p&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;section&quot;&gt;
+      &lt;h2&gt;家具独立站 UI 预览&lt;/h2&gt;
+      &lt;div class=&quot;preview-shell&quot;&gt;
+        &lt;nav class=&quot;nav&quot;&gt;
+          &lt;div class=&quot;logo&quot;&gt;ATUNUS &lt;span&gt;HOME&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;nav-links&quot;&gt;
+            &lt;span&gt;Outdoor&lt;/span&gt;
+            &lt;span&gt;Living Room&lt;/span&gt;
+            &lt;span&gt;Dining&lt;/span&gt;
+            &lt;span&gt;Sale&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;nav-actions&quot;&gt;
+            &lt;div class=&quot;icon-button&quot;&gt;⌕&lt;/div&gt;
+            &lt;div class=&quot;icon-button&quot;&gt;0&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/nav&gt;
+
+        &lt;section class=&quot;hero&quot;&gt;
+          &lt;div class=&quot;hero-copy&quot;&gt;
+            &lt;p class=&quot;eyebrow&quot;&gt;New Collection&lt;/p&gt;
+            &lt;h2&gt;Calm furniture for warm, modern homes.&lt;/h2&gt;
+            &lt;p&gt;以低饱和自然绿与米白承托产品质感，让家具图片成为视觉中心，同时保留足够强的购买行动入口。&lt;/p&gt;
+            &lt;div class=&quot;button-row&quot;&gt;
+              &lt;a class=&quot;btn btn-primary&quot; href=&quot;#&quot;&gt;Shop Collection&lt;/a&gt;
+              &lt;a class=&quot;btn btn-secondary&quot; href=&quot;#&quot;&gt;View Lookbook&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;hero-visual&quot;&gt;
+            &lt;div class=&quot;product-stage&quot;&gt;
+              &lt;div class=&quot;table-top&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;leg a&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;leg b&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;leg c&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;leg d&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;floor-line&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;floating-card&quot;&gt;
+                &lt;span class=&quot;badge&quot;&gt;ONLINE SALE&lt;/span&gt;
+                &lt;div class=&quot;price&quot;&gt;$56.00 &lt;small&gt;$80.00&lt;/small&gt;&lt;/div&gt;
+                &lt;p style=&quot;margin:0;color:var(--neutral-700);font-size:13px;&quot;&gt;Side table · black metal&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;products&quot;&gt;
+          &lt;article class=&quot;product-card&quot;&gt;
+            &lt;div class=&quot;product-image&quot;&gt;&lt;div class=&quot;chair&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;product-info&quot;&gt;
+              &lt;div class=&quot;meta&quot;&gt;Best Seller&lt;/div&gt;
+              &lt;h3&gt;Woven Patio Chair&lt;/h3&gt;
+              &lt;p&gt;自然色系搭配深绿按钮，适合高质感商品卡片。&lt;/p&gt;
+              &lt;div class=&quot;product-footer&quot;&gt;&lt;strong&gt;$129&lt;/strong&gt;&lt;button class=&quot;small-btn&quot;&gt;Add&lt;/button&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;product-card&quot;&gt;
+            &lt;div class=&quot;product-image&quot;&gt;&lt;div class=&quot;console&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;product-info&quot;&gt;
+              &lt;div class=&quot;meta&quot;&gt;New In&lt;/div&gt;
+              &lt;h3&gt;Oak Console Table&lt;/h3&gt;
+              &lt;p&gt;中性色承托产品，Brand 600 作为品牌色，可做分类、状态文字与品牌按钮。&lt;/p&gt;
+              &lt;div class=&quot;product-footer&quot;&gt;&lt;strong&gt;$248&lt;/strong&gt;&lt;button class=&quot;small-btn&quot;&gt;Add&lt;/button&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;product-card&quot;&gt;
+            &lt;div class=&quot;product-image&quot;&gt;&lt;div class=&quot;stool&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;product-info&quot;&gt;
+              &lt;div class=&quot;meta&quot;&gt;Sale&lt;/div&gt;
+              &lt;h3&gt;Minimal Side Stool&lt;/h3&gt;
+              &lt;p&gt;促销价格建议单独用陶土色，不破坏品牌绿色系。&lt;/p&gt;
+              &lt;div class=&quot;product-footer&quot;&gt;&lt;strong style=&quot;color:var(--accent-sale)&quot;&gt;$56&lt;/strong&gt;&lt;button class=&quot;small-btn&quot;&gt;Add&lt;/button&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/article&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;form-band&quot;&gt;
+          &lt;div&gt;
+            &lt;p class=&quot;eyebrow&quot; style=&quot;color:var(--brand-400)&quot;&gt;Trade Program&lt;/p&gt;
+            &lt;h2&gt;For designers, studios and hospitality projects.&lt;/h2&gt;
+            &lt;p&gt;深色区域建议使用 Brand 950 / 900，文字使用 Neutral 50 / 300，按钮使用浅色或 Brand 400 点缀。&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;newsletter&quot;&gt;
+            &lt;h3 style=&quot;color:var(--neutral-50)&quot;&gt;Get the material guide&lt;/h3&gt;
+            &lt;p&gt;输入邮箱获取家具材质、色彩搭配和场景灵感。&lt;/p&gt;
+            &lt;div class=&quot;input-row&quot;&gt;
+              &lt;input type=&quot;email&quot; value=&quot;hello@example.com&quot; aria-label=&quot;Email&quot; /&gt;
+              &lt;a class=&quot;btn btn-secondary&quot; href=&quot;#&quot; style=&quot;background:var(--neutral-50);border-color:var(--neutral-50);&quot;&gt;Subscribe&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;section&quot;&gt;
+      &lt;h2&gt;Semantic Token 映射&lt;/h2&gt;
+      &lt;p class=&quot;lead&quot; style=&quot;margin-bottom:18px;font-size:15px;max-width:860px;&quot;&gt;已把基础 Token、Action、Surface / Fill、State、Overlay / Shadow 全部添加到 HTML 中。基础 Token 保持克制；交互和状态 Token 用来支撑按钮、表单、商品卡、筛选器、弹窗和选中态。&lt;/p&gt;
+
+      &lt;div class=&quot;token-preview-grid&quot;&gt;
+        &lt;article class=&quot;token-preview-card&quot;&gt;
+          &lt;h3&gt;Action Tokens&lt;/h3&gt;
+          &lt;p&gt;用于主按钮、次按钮、hover、active、disabled。&lt;/p&gt;
+          &lt;div class=&quot;demo-button-stack&quot;&gt;
+            &lt;div class=&quot;demo-button primary&quot;&gt;Primary CTA&lt;/div&gt;
+            &lt;div class=&quot;demo-button hover&quot;&gt;Primary Hover&lt;/div&gt;
+            &lt;div class=&quot;demo-button secondary&quot;&gt;Secondary&lt;/div&gt;
+            &lt;div class=&quot;demo-button disabled&quot;&gt;Disabled&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;token-preview-card&quot;&gt;
+          &lt;h3&gt;Surface / Fill Tokens&lt;/h3&gt;
+          &lt;p&gt;用于商品卡、筛选器、浅色模块、输入框和选中背景。&lt;/p&gt;
+          &lt;div class=&quot;surface-row&quot;&gt;
+            &lt;div class=&quot;surface-chip&quot; style=&quot;background:var(--color-surface-card)&quot;&gt;Card&lt;/div&gt;
+            &lt;div class=&quot;surface-chip&quot; style=&quot;background:var(--color-surface-subtle)&quot;&gt;Subtle&lt;/div&gt;
+            &lt;div class=&quot;surface-chip&quot; style=&quot;background:var(--color-surface-muted)&quot;&gt;Muted&lt;/div&gt;
+            &lt;div class=&quot;surface-chip&quot; style=&quot;background:var(--color-surface-brand)&quot;&gt;Brand&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;token-preview-card&quot;&gt;
+          &lt;h3&gt;State Tokens&lt;/h3&gt;
+          &lt;p&gt;用于 hover、pressed、focus、error、success、warning。&lt;/p&gt;
+          &lt;div class=&quot;state-row&quot;&gt;
+            &lt;div class=&quot;state-chip&quot; style=&quot;background:var(--color-state-hover)&quot;&gt;Hover&lt;/div&gt;
+            &lt;div class=&quot;state-chip&quot; style=&quot;background:var(--color-state-pressed)&quot;&gt;Pressed&lt;/div&gt;
+            &lt;div class=&quot;state-chip&quot; style=&quot;border-color:var(--color-state-focus);color:var(--color-state-focus)&quot;&gt;Focus&lt;/div&gt;
+            &lt;div class=&quot;state-chip&quot; style=&quot;color:var(--color-state-error)&quot;&gt;Error&lt;/div&gt;
+            &lt;div class=&quot;state-chip&quot; style=&quot;color:var(--color-state-success)&quot;&gt;Success&lt;/div&gt;
+            &lt;div class=&quot;state-chip&quot; style=&quot;color:var(--color-state-warning)&quot;&gt;Warning&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;token-preview-card&quot;&gt;
+          &lt;h3&gt;Overlay / Shadow&lt;/h3&gt;
+          &lt;p&gt;用于弹窗遮罩、抽屉、卡片与浮层阴影。&lt;/p&gt;
+          &lt;div class=&quot;overlay-demo&quot;&gt;&lt;/div&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+
+      &lt;table class=&quot;token-table&quot;&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;&lt;th&gt;UI Token&lt;/th&gt;&lt;th&gt;Mapped Color&lt;/th&gt;&lt;th&gt;Hex / Value&lt;/th&gt;&lt;th&gt;Usage&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Base Background&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-bg-page&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 50&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-bg-page)&quot;&gt;&lt;/span&gt;#FAFAF9&lt;/td&gt;&lt;td&gt;页面大背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-bg-section&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 100&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-bg-section)&quot;&gt;&lt;/span&gt;#F3F3F0&lt;/td&gt;&lt;td&gt;首页模块、分区背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-bg-Base&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 50&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-bg-Base)&quot;&gt;&lt;/span&gt;#FAFAF9&lt;/td&gt;&lt;td&gt;默认基础背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-bg-white&lt;/span&gt;&lt;/td&gt;&lt;td&gt;White&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-bg-white)&quot;&gt;&lt;/span&gt;#FFFFFF&lt;/td&gt;&lt;td&gt;商品卡片、弹窗、表单卡片&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Text&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-text-Primary&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 900&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-text-Primary)&quot;&gt;&lt;/span&gt;#2A2926&lt;/td&gt;&lt;td&gt;主标题、正文重点&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-text-Secondary&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 700&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-text-Secondary)&quot;&gt;&lt;/span&gt;#56534F&lt;/td&gt;&lt;td&gt;正文、商品描述&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-text-Tertiary&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 500&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-text-Tertiary)&quot;&gt;&lt;/span&gt;#98958F&lt;/td&gt;&lt;td&gt;弱提示、占位符、辅助信息&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-text-Inverse&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 50&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-text-Inverse)&quot;&gt;&lt;/span&gt;#FAFAF9&lt;/td&gt;&lt;td&gt;深色背景上的文字&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-text-Brand&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 600&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-text-Brand)&quot;&gt;&lt;/span&gt;#707461&lt;/td&gt;&lt;td&gt;品牌文字、强调标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-text-disabled&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 400&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-text-disabled)&quot;&gt;&lt;/span&gt;#BEBBB4&lt;/td&gt;&lt;td&gt;禁用文字、不可点击状态&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Border&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-border-Base&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 300&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-border-Base)&quot;&gt;&lt;/span&gt;#D7D5CF&lt;/td&gt;&lt;td&gt;默认边框&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-border-Subtle&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 200&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-border-Subtle)&quot;&gt;&lt;/span&gt;#E8E7E2&lt;/td&gt;&lt;td&gt;轻分割线、弱边框&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-border-Strong&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 500&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-border-Strong)&quot;&gt;&lt;/span&gt;#98958F&lt;/td&gt;&lt;td&gt;强边框、表单强调&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-border-Brand&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 600&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-border-Brand)&quot;&gt;&lt;/span&gt;#707461&lt;/td&gt;&lt;td&gt;选中态、品牌边框&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Sale&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-sale&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Terracotta&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-sale)&quot;&gt;&lt;/span&gt;#B96A4C&lt;/td&gt;&lt;td&gt;促销价、Sale 标签、折扣信息&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Action&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-action-primary&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 600&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-action-primary)&quot;&gt;&lt;/span&gt;#707461&lt;/td&gt;&lt;td&gt;主按钮、Checkout、Add to Cart&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-action-primary-hover&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 700&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-action-primary-hover)&quot;&gt;&lt;/span&gt;#565A49&lt;/td&gt;&lt;td&gt;主按钮 hover&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-action-primary-active&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 800&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-action-primary-active)&quot;&gt;&lt;/span&gt;#3D4134&lt;/td&gt;&lt;td&gt;主按钮 pressed / active&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-action-secondary&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 100&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-action-secondary)&quot;&gt;&lt;/span&gt;#EEEFE6&lt;/td&gt;&lt;td&gt;次按钮、浅品牌按钮&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-action-secondary-hover&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 200&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-action-secondary-hover)&quot;&gt;&lt;/span&gt;#E2E3D7&lt;/td&gt;&lt;td&gt;次按钮 hover&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-action-disabled&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 300&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-action-disabled)&quot;&gt;&lt;/span&gt;#D7D5CF&lt;/td&gt;&lt;td&gt;禁用按钮背景&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Surface / Fill&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-surface-card&lt;/span&gt;&lt;/td&gt;&lt;td&gt;White&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-surface-card)&quot;&gt;&lt;/span&gt;#FFFFFF&lt;/td&gt;&lt;td&gt;商品卡、弹窗、内容卡片&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-surface-subtle&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 100&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-surface-subtle)&quot;&gt;&lt;/span&gt;#F3F3F0&lt;/td&gt;&lt;td&gt;轻背景、筛选器背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-surface-muted&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 200&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-surface-muted)&quot;&gt;&lt;/span&gt;#E8E7E2&lt;/td&gt;&lt;td&gt;更明显的区块背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-surface-brand&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 50&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-surface-brand)&quot;&gt;&lt;/span&gt;#F7F8F2&lt;/td&gt;&lt;td&gt;浅品牌模块、品牌提示背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-fill-input&lt;/span&gt;&lt;/td&gt;&lt;td&gt;White&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-fill-input)&quot;&gt;&lt;/span&gt;#FFFFFF&lt;/td&gt;&lt;td&gt;输入框、选择器背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-fill-selected&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 100&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-fill-selected)&quot;&gt;&lt;/span&gt;#EEEFE6&lt;/td&gt;&lt;td&gt;选中项、筛选标签选中背景&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;State&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-state-hover&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 100&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-state-hover)&quot;&gt;&lt;/span&gt;#F3F3F0&lt;/td&gt;&lt;td&gt;列表项、菜单项 hover&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-state-pressed&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 200&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-state-pressed)&quot;&gt;&lt;/span&gt;#E8E7E2&lt;/td&gt;&lt;td&gt;pressed / active 背景&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-state-focus&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 600&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-state-focus)&quot;&gt;&lt;/span&gt;#707461&lt;/td&gt;&lt;td&gt;表单 focus、键盘焦点环&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-state-error&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Muted Red&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-state-error)&quot;&gt;&lt;/span&gt;#B94A3E&lt;/td&gt;&lt;td&gt;表单错误、错误提示&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-state-success&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Brand 600&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-state-success)&quot;&gt;&lt;/span&gt;#707461&lt;/td&gt;&lt;td&gt;成功提示、库存充足&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-state-warning&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Warm Ochre&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-state-warning)&quot;&gt;&lt;/span&gt;#B8895A&lt;/td&gt;&lt;td&gt;库存紧张、注意提示&lt;/td&gt;&lt;/tr&gt;
+
+          &lt;tr class=&quot;group-row&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;Overlay / Shadow&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-overlay&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 950 / 48%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-overlay)&quot;&gt;&lt;/span&gt;rgba(23, 22, 19, 0.48)&lt;/td&gt;&lt;td&gt;弹窗、抽屉、移动端菜单遮罩&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-shadow-soft&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 950 / 8%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-shadow-soft)&quot;&gt;&lt;/span&gt;rgba(23, 22, 19, 0.08)&lt;/td&gt;&lt;td&gt;商品卡、轻浮层阴影&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;span class=&quot;token-name&quot;&gt;--color-shadow-strong&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Neutral 950 / 16%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;mini-swatch&quot; style=&quot;background:var(--color-shadow-strong)&quot;&gt;&lt;/span&gt;rgba(23, 22, 19, 0.16)&lt;/td&gt;&lt;td&gt;抽屉、弹窗、强浮层阴影&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+      &lt;pre class=&quot;css-code&quot;&gt;:root {
+  --color-bg-page: #FAFAF9;
+  --color-bg-section: #F3F3F0;
+  --color-bg-Base: #FAFAF9;
+  --color-bg-white: #FFFFFF;
+
+  --color-text-Primary: #2A2926;
+  --color-text-Secondary: #56534F;
+  --color-text-Tertiary: #98958F;
+  --color-text-Inverse: #FAFAF9;
+  --color-text-Brand: #707461;
+  --color-text-disabled: #BEBBB4;
+
+  --color-border-Base: #D7D5CF;
+  --color-border-Subtle: #E8E7E2;
+  --color-border-Strong: #98958F;
+  --color-border-Brand: #707461;
+
+  --color-sale: #B96A4C;
+
+  --color-action-primary: #707461;
+  --color-action-primary-hover: #565A49;
+  --color-action-primary-active: #3D4134;
+  --color-action-secondary: #EEEFE6;
+  --color-action-secondary-hover: #E2E3D7;
+  --color-action-disabled: #D7D5CF;
+
+  --color-surface-card: #FFFFFF;
+  --color-surface-subtle: #F3F3F0;
+  --color-surface-muted: #E8E7E2;
+  --color-surface-brand: #F7F8F2;
+  --color-fill-input: #FFFFFF;
+  --color-fill-selected: #EEEFE6;
+
+  --color-state-hover: #F3F3F0;
+  --color-state-pressed: #E8E7E2;
+  --color-state-focus: #707461;
+  --color-state-error: #B94A3E;
+  --color-state-success: #707461;
+  --color-state-warning: #B8895A;
+
+  --color-overlay: rgba(23, 22, 19, 0.48);
+  --color-shadow-soft: rgba(23, 22, 19, 0.08);
+  --color-shadow-strong: rgba(23, 22, 19, 0.16);
+}&lt;/pre&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+      </div>
+    </section>
+
+    <section class="panel" id="typography-system">
+      <div class="panel-head">
+        <div>
+          <h2>02 · Figma Text Styles</h2>
+          <p>包含 Figma Text Styles 命名结构、桌面端排版规格、UI 文本规格、响应式排版与使用规则。</p>
+        </div>
+        <span class="tag">Typography HTML</span>
+      </div>
+      <div class="frame-wrap">
+        <iframe title="ATUNUS HOME Figma Text Styles" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+  &lt;title&gt;ATUNUS HOME · Figma Text Styles Specification&lt;/title&gt;
+  &lt;style&gt;
+    :root {
+      --brand-50: #F7F8F2;
+      --brand-100: #EEEFE6;
+      --brand-200: #E2E3D7;
+      --brand-300: #CECEBC;
+      --brand-400: #A9AC99;
+      --brand-500: #8B8F7C;
+      --brand-600: #707461;
+      --brand-700: #565A49;
+      --brand-800: #3D4134;
+      --brand-900: #292D23;
+      --brand-950: #171A13;
+
+      --neutral-50: #FAFAF9;
+      --neutral-100: #F3F3F0;
+      --neutral-200: #E8E7E2;
+      --neutral-300: #D7D5CF;
+      --neutral-400: #BEBBB4;
+      --neutral-500: #98958F;
+      --neutral-600: #716E69;
+      --neutral-700: #56534F;
+      --neutral-800: #3E3C38;
+      --neutral-900: #2A2926;
+      --neutral-950: #171613;
+
+      --sale: #B96A4C;
+      --white: #FFFFFF;
+
+      --page: var(--neutral-50);
+      --card: var(--white);
+      --text: var(--neutral-900);
+      --text-secondary: var(--neutral-700);
+      --text-tertiary: var(--neutral-500);
+      --border: var(--neutral-300);
+
+      --shadow-soft: 0 18px 55px rgba(23, 22, 19, 0.08);
+      --shadow-card: 0 8px 22px rgba(23, 26, 23, 0.06);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(162, 193, 166, 0.20), transparent 36rem),
+        linear-gradient(180deg, var(--neutral-50), #fff 72rem);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 56px 0 80px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 34px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(216,214,205,0.85);
+      border-radius: var(--radius-xl);
+      padding: 44px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow {
+      color: var(--brand-600);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      margin: 0 0 22px;
+      font-weight: 650;
+    }
+
+    .hero p {
+      max-width: 68ch;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .hero-panel {
+      background: var(--brand-600);
+      color: var(--neutral-50);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 340px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .logo {
+      letter-spacing: .44em;
+      font-size: 18px;
+      line-height: 1;
+      color: var(--neutral-50);
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--brand-400); }
+
+    .toc {
+      margin-top: 28px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      color: var(--neutral-100);
+      text-decoration: none;
+      border: 1px solid rgba(250,250,246,.18);
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .toc a span {
+      color: var(--brand-300);
+      font-variant-numeric: tabular-nums;
+    }
+
+    section {
+      margin-top: 26px;
+      background: rgba(255,255,255,0.80);
+      border: 1px solid rgba(216,214,205,0.85);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      border-bottom: 1px solid var(--neutral-200);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      font-weight: 650;
+    }
+
+    .section-desc {
+      margin: 8px 0 0;
+      color: var(--text-secondary);
+      max-width: 72ch;
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: var(--brand-100);
+      color: var(--brand-600);
+      border: 1px solid var(--brand-200);
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .rule-card, .style-card, .component-card {
+      background: var(--neutral-50);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .rule-card h3, .style-card h3, .component-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .rule-card p, .component-card p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .swatch-line {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-bottom: 18px;
+    }
+
+    .swatch-line span:nth-child(1) { background: var(--brand-900); }
+    .swatch-line span:nth-child(2) { background: var(--brand-400); }
+    .swatch-line span:nth-child(3) { background: var(--neutral-200); }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--neutral-200);
+      border-radius: 18px;
+      background: var(--white);
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--neutral-200);
+    }
+
+    th {
+      background: var(--neutral-100);
+      color: var(--neutral-800);
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: 750;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    code {
+      font-family: &quot;SF Mono&quot;, ui-monospace, Menlo, Consolas, monospace;
+      background: var(--neutral-100);
+      border: 1px solid var(--neutral-200);
+      padding: 2px 6px;
+      border-radius: 7px;
+      color: var(--brand-900);
+      font-size: .92em;
+    }
+
+    .naming-tree {
+      background: var(--neutral-950);
+      color: var(--neutral-50);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      overflow-x: auto;
+      font-family: &quot;SF Mono&quot;, ui-monospace, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.65;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .naming-tree .muted { color: var(--neutral-400); }
+    .naming-tree .brand { color: var(--brand-300); }
+
+    .sample {
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      gap: 22px;
+      align-items: baseline;
+      border-bottom: 1px solid var(--neutral-200);
+      padding: 18px 0;
+    }
+
+    .sample:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .sample-name strong {
+      display: block;
+      color: var(--neutral-900);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .sample-name span {
+      color: var(--text-tertiary);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .sample-meta {
+      color: var(--text-secondary);
+      font-size: 13px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .display-01 { font-size: 72px; line-height: 1.1; letter-spacing: -0.045em; font-weight: 650; }
+    .display-02 { font-size: 56px; line-height: 1.12; letter-spacing: -0.04em; font-weight: 650; }
+    .h1 { font-size: 48px; line-height: 1.16; letter-spacing: -0.04em; font-weight: 650; }
+    .h2 { font-size: 40px; line-height: 1.2; letter-spacing: -0.035em; font-weight: 650; }
+    .h3 { font-size: 32px; line-height: 1.25; letter-spacing: -0.03em; font-weight: 600; }
+    .h4 { font-size: 24px; line-height: 1.3; letter-spacing: -0.025em; font-weight: 600; }
+    .h5 { font-size: 20px; line-height: 1.35; letter-spacing: -0.015em; font-weight: 600; }
+    .h6 { font-size: 18px; line-height: 1.4; letter-spacing: -0.01em; font-weight: 600; }
+    .body-large { font-size: 18px; line-height: 1.5; font-weight: 400; }
+    .body-base { font-size: 16px; line-height: 1.5; font-weight: 400; }
+    .body-small { font-size: 14px; line-height: 1.45; font-weight: 400; }
+    .caption { font-size: 12px; line-height: 1.4; font-weight: 400; letter-spacing: .01em; }
+    .button-text { font-size: 16px; line-height: 1.2; font-weight: 500; letter-spacing: .01em; }
+    .price { font-size: 20px; line-height: 1.2; font-weight: 650; letter-spacing: -0.015em; }
+    .sale-price { font-size: 20px; line-height: 1.2; font-weight: 650; color: var(--sale); letter-spacing: -0.015em; }
+    .badge-text { font-size: 12px; line-height: 1.2; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+
+    .preview-area {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .site-preview {
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--neutral-200);
+    }
+
+    .site-nav .brandmark {
+      font-size: 13px;
+      letter-spacing: .28em;
+      font-weight: 650;
+      color: var(--neutral-900);
+    }
+
+    .site-nav a {
+      color: var(--neutral-700);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 18px;
+    }
+
+    .site-hero {
+      background: linear-gradient(135deg, var(--neutral-50), var(--brand-100));
+      min-height: 310px;
+      padding: 42px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .site-hero .kicker {
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .12em;
+      color: var(--brand-700);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .site-hero h3 {
+      margin: 0;
+      font-size: 46px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .site-hero p {
+      max-width: 48ch;
+      margin: 18px 0 0;
+      font-size: 16px;
+      color: var(--neutral-700);
+      line-height: 1.55;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .product-img {
+      height: 230px;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(162,193,166,.33), transparent 10rem),
+        linear-gradient(180deg, var(--neutral-100), var(--neutral-50));
+      display: grid;
+      place-items: center;
+    }
+
+    .table-icon {
+      width: 128px;
+      height: 128px;
+      position: relative;
+    }
+
+    .table-icon:before {
+      content: &quot;&quot;;
+      position: absolute;
+      inset: 14px 18px auto;
+      height: 18px;
+      background: var(--neutral-900);
+      border-radius: 3px;
+      box-shadow: 0 84px 0 -6px rgba(42,41,38,0.18);
+    }
+
+    .table-icon span {
+      position: absolute;
+      width: 8px;
+      height: 94px;
+      background: var(--neutral-900);
+      top: 30px;
+      border-radius: 999px;
+    }
+    .table-icon span:nth-child(1) { left: 24px; transform: rotate(-2deg); }
+    .table-icon span:nth-child(2) { right: 24px; transform: rotate(2deg); }
+    .table-icon span:nth-child(3) { left: 58px; height: 74px; top: 42px; background: var(--neutral-800); }
+    .table-icon span:nth-child(4) { right: 58px; height: 74px; top: 42px; background: var(--neutral-800); }
+
+    .product-body { padding: 20px; }
+
+    .product-body .badge {
+      display: inline-flex;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--brand-100);
+      color: var(--brand-900);
+      margin-bottom: 12px;
+    }
+
+    .product-body h4 {
+      margin: 0 0 7px;
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .product-body p {
+      margin: 0 0 16px;
+      color: var(--neutral-700);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .prices {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .prices del {
+      color: var(--neutral-500);
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      border: 1px solid var(--brand-900);
+      background: var(--brand-600);
+      color: var(--neutral-50);
+      min-height: 46px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+
+    .note {
+      padding: 18px 20px;
+      border: 1px solid var(--brand-200);
+      background: var(--brand-50);
+      border-radius: var(--radius-lg);
+      color: var(--brand-900);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .code-block {
+      white-space: pre-wrap;
+      background: var(--neutral-950);
+      color: var(--neutral-50);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      overflow: auto;
+      font-family: &quot;SF Mono&quot;, ui-monospace, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .code-block .comment { color: #A8B2A7; }
+    .code-block .key { color: #CECEBC; }
+    .code-block .value { color: #FAFAF9; }
+
+    .weight-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-right: 7px;
+      background: var(--brand-600);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid.two,
+      .grid.three,
+      .grid.four,
+      .preview-area {
+        grid-template-columns: 1fr;
+      }
+
+      .sample {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .sample-meta { text-align: left; }
+
+      .display-01 { font-size: 48px; }
+      .display-02 { font-size: 42px; }
+      .h1 { font-size: 38px; }
+      .h2 { font-size: 32px; }
+      .logo { white-space: normal; }
+    }
+
+    @media print {
+      body { background: white; }
+      .page { width: 100%; padding: 0; }
+      section, .hero-card, .hero-panel { box-shadow: none; break-inside: avoid; }
+      .toc { display: none; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;main class=&quot;page&quot;&gt;
+    &lt;div class=&quot;hero&quot;&gt;
+      &lt;div class=&quot;hero-card&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;Typography Specification&lt;/div&gt;
+        &lt;h1&gt;ATUNUS HOME&lt;br /&gt;Text Styles 规范&lt;/h1&gt;
+        &lt;p&gt;
+          本规范用于 ATUNUS HOME 在 Figma 中建立、命名和使用文本样式。文本样式以使用场景为核心，覆盖标题、正文、按钮、价格、标签、表单、链接与辅助信息，确保页面设计、组件维护和 Agent 读取保持一致。
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;aside class=&quot;hero-panel&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;logo&quot;&gt;ATUNUS &lt;span&gt;HOME&lt;/span&gt;&lt;/div&gt;
+          &lt;p style=&quot;margin-top: 24px; color: var(--neutral-200); font-size: 15px; line-height: 1.65;&quot;&gt;
+            排版系统应保持清晰、克制、可维护。Text Styles 只定义字体、字号、行高、字重与字距；颜色、状态和交互应通过 Color Styles、Variables 与 Components 管理。
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;nav class=&quot;toc&quot; aria-label=&quot;目录&quot;&gt;
+          &lt;a href=&quot;#principles&quot;&gt;&lt;span&gt;01&lt;/span&gt;基础原则&lt;/a&gt;
+          &lt;a href=&quot;#naming&quot;&gt;&lt;span&gt;02&lt;/span&gt;命名结构&lt;/a&gt;
+          &lt;a href=&quot;#scale&quot;&gt;&lt;span&gt;03&lt;/span&gt;桌面端排版规格&lt;/a&gt;
+          &lt;a href=&quot;#ui&quot;&gt;&lt;span&gt;04&lt;/span&gt;UI 文本规格&lt;/a&gt;
+          &lt;a href=&quot;#responsive&quot;&gt;&lt;span&gt;05&lt;/span&gt;响应式规格&lt;/a&gt;
+          &lt;a href=&quot;#usage&quot;&gt;&lt;span&gt;06&lt;/span&gt;使用规则&lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+
+    &lt;section id=&quot;principles&quot;&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;01 · 基础原则&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;Text Styles 是排版系统的基础资产。它们需要稳定、语义清晰，并能在页面、组件和设计文档之间复用。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Principles&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;grid four&quot;&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;div class=&quot;swatch-line&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;h3&gt;语义优先&lt;/h3&gt;
+          &lt;p&gt;样式名称应表达用途，例如 &lt;code&gt;Body / Base&lt;/code&gt;、&lt;code&gt;Heading / H2&lt;/code&gt;、&lt;code&gt;Button / Base&lt;/code&gt;。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;div class=&quot;swatch-line&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;h3&gt;层级稳定&lt;/h3&gt;
+          &lt;p&gt;Display、Heading、Body、Label、Button、Commerce、Form 各自承担明确场景，避免混用。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;div class=&quot;swatch-line&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;h3&gt;字重克制&lt;/h3&gt;
+          &lt;p&gt;常用字重控制在 Regular、Medium、SemiBold。ExtraBold 仅用于极少数品牌展示或强促销场景。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;div class=&quot;swatch-line&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;h3&gt;职责分离&lt;/h3&gt;
+          &lt;p&gt;Text Styles 只管理排版。颜色使用 Color Styles / Variables，状态使用 Component Variants。&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&quot;naming&quot;&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;02 · Figma Text Styles 命名结构&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;Figma 样式采用三级命名：类别 / 层级或尺寸 / 字重。结构应保持简洁，并避免同一用途出现多个相似名称。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Style Tree&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;naming-tree&quot;&gt;&lt;span class=&quot;brand&quot;&gt;Typography&lt;/span&gt;
+├─ &lt;span class=&quot;brand&quot;&gt;Display&lt;/span&gt;
+│  ├─ 01 / Regular
+│  ├─ 01 / SemiBold
+│  ├─ 02 / Regular
+│  └─ 02 / SemiBold
+│
+├─ &lt;span class=&quot;brand&quot;&gt;Heading&lt;/span&gt;
+│  ├─ H1 / Medium
+│  ├─ H1 / SemiBold
+│  ├─ H2 / Medium
+│  ├─ H2 / SemiBold
+│  ├─ H3 / Medium
+│  ├─ H3 / SemiBold
+│  ├─ H4 / Medium
+│  ├─ H5 / Medium
+│  └─ H6 / Medium
+│
+├─ &lt;span class=&quot;brand&quot;&gt;Body&lt;/span&gt;
+│  ├─ Large / Regular
+│  ├─ Large / Medium
+│  ├─ Base / Regular
+│  ├─ Base / Medium
+│  ├─ Small / Regular
+│  └─ Small / Medium
+│
+├─ &lt;span class=&quot;brand&quot;&gt;Label&lt;/span&gt;
+│  ├─ Large / Medium
+│  ├─ Base / Medium
+│  └─ Small / Medium
+│
+├─ &lt;span class=&quot;brand&quot;&gt;Button&lt;/span&gt;
+│  ├─ Large / Medium
+│  ├─ Base / Medium
+│  └─ Small / Medium
+│
+├─ &lt;span class=&quot;brand&quot;&gt;Link&lt;/span&gt;
+│  ├─ Large / Regular
+│  ├─ Base / Regular
+│  └─ Small / Regular
+│
+├─ &lt;span class=&quot;brand&quot;&gt;Commerce&lt;/span&gt;
+│  ├─ Price / Base
+│  ├─ Price / Sale
+│  └─ Badge / Base
+│
+└─ &lt;span class=&quot;brand&quot;&gt;Form&lt;/span&gt;
+   ├─ Input / Base
+   ├─ Helper / Base
+   └─ Error / Base&lt;/div&gt;
+
+      &lt;div style=&quot;margin-top: 20px;&quot; class=&quot;note&quot;&gt;
+        &lt;strong&gt;命名规则：&lt;/strong&gt;类别使用语义名称，层级使用 H1-H6、Large/Base/Small 或具体业务名称，字重使用 Regular、Medium、SemiBold。样式名称不包含颜色、状态、页面名称或临时用途。
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&quot;scale&quot;&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;03 · 桌面端排版规格&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;桌面端标题保持品牌展示感，正文保持阅读舒适度。标题行高偏紧，正文行高偏松。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Desktop Scale&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;style-list&quot;&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Display / 01&lt;/strong&gt;&lt;span&gt;首页 Hero 大标题、品牌口号&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview display-01&quot;&gt;Quiet outdoor living&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;72 / 110% · Regular / SemiBold&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Display / 02&lt;/strong&gt;&lt;span&gt;大型营销标题、品牌专题&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview display-02&quot;&gt;Design for open air&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;56 / 112% · Regular / SemiBold&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Heading / H1&lt;/strong&gt;&lt;span&gt;页面主标题&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview h1&quot;&gt;Outdoor furniture collection&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;48 / 116% · Medium / SemiBold&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Heading / H2&lt;/strong&gt;&lt;span&gt;Section 标题&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview h2&quot;&gt;Create a calmer patio&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;40 / 120% · Medium / SemiBold&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Heading / H3&lt;/strong&gt;&lt;span&gt;模块标题、集合标题&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview h3&quot;&gt;Modular comfort, refined details&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;32 / 125% · Medium / SemiBold&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Heading / H4&lt;/strong&gt;&lt;span&gt;商品区标题、小模块标题&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview h4&quot;&gt;Aluminum patio side table&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;24 / 130% · Medium&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Heading / H5&lt;/strong&gt;&lt;span&gt;卡片标题、推荐模块&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview h5&quot;&gt;Weather-ready and easy to move&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;20 / 135% · Medium&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Heading / H6&lt;/strong&gt;&lt;span&gt;小标题、列表标题&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview h6&quot;&gt;Materials and care&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;18 / 140% · Medium&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Body / Large&lt;/strong&gt;&lt;span&gt;品牌介绍、大段导语&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview body-large&quot;&gt;Designed for everyday lounging, crafted with durable materials and soft proportions.&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;18 / 150% · Regular / Medium&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Body / Base&lt;/strong&gt;&lt;span&gt;默认正文、商品描述&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview body-base&quot;&gt;A versatile side table with a powder-coated frame and refined silhouette for modern outdoor spaces.&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;16 / 150% · Regular / Medium&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Body / Small&lt;/strong&gt;&lt;span&gt;辅助说明、商品元信息&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview body-small&quot;&gt;Ships in 2–5 business days. Free returns within 30 days.&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;14 / 145% · Regular / Medium&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample&quot;&gt;
+          &lt;div class=&quot;sample-name&quot;&gt;&lt;strong&gt;Caption / Base&lt;/strong&gt;&lt;span&gt;标签说明、meta 信息&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;sample-preview caption&quot;&gt;SKU: ATN-TB-204 · Updated Jun 2026&lt;/div&gt;
+          &lt;div class=&quot;sample-meta&quot;&gt;12 / 140% · Regular / Medium&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&quot;ui&quot;&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;04 · UI 文本规格&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;UI 文本样式服务按钮、标签、价格、徽章、输入框和提示信息。这些样式具有明确组件场景，不与普通正文混用。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;UI Text&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Figma Text Style&lt;/th&gt;
+            &lt;th&gt;Size / Line Height&lt;/th&gt;
+            &lt;th&gt;Weight&lt;/th&gt;
+            &lt;th&gt;使用场景&lt;/th&gt;
+            &lt;th&gt;规则&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Button / Large / Medium&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;18 / 120%&lt;/td&gt;
+            &lt;td&gt;Medium&lt;/td&gt;
+            &lt;td&gt;大号 CTA、Hero 按钮&lt;/td&gt;
+            &lt;td&gt;按钮颜色和状态由 Button Component 控制&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Button / Base / Medium&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;16 / 120%&lt;/td&gt;
+            &lt;td&gt;Medium&lt;/td&gt;
+            &lt;td&gt;默认按钮、Add to Cart&lt;/td&gt;
+            &lt;td&gt;全站主要按钮默认规格&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Button / Small / Medium&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;14 / 120%&lt;/td&gt;
+            &lt;td&gt;Medium&lt;/td&gt;
+            &lt;td&gt;商品卡小按钮、筛选按钮&lt;/td&gt;
+            &lt;td&gt;用于空间受限的组件&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Label / Large / Medium&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;16 / 120%&lt;/td&gt;
+            &lt;td&gt;Medium&lt;/td&gt;
+            &lt;td&gt;大表单 Label、设置分组标题&lt;/td&gt;
+            &lt;td&gt;与输入框内容区分&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Label / Base / Medium&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;14 / 120%&lt;/td&gt;
+            &lt;td&gt;Medium&lt;/td&gt;
+            &lt;td&gt;表单 Label、筛选器标题&lt;/td&gt;
+            &lt;td&gt;全站默认 Label&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Label / Small / Medium&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;12 / 120%&lt;/td&gt;
+            &lt;td&gt;Medium&lt;/td&gt;
+            &lt;td&gt;小标签、卡片元信息&lt;/td&gt;
+            &lt;td&gt;可配合轻微字距&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Link / Large / Regular&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;18 / 150%&lt;/td&gt;
+            &lt;td&gt;Regular&lt;/td&gt;
+            &lt;td&gt;大段内容中的强调链接&lt;/td&gt;
+            &lt;td&gt;Underline 和 Hover 由 Link Component 控制&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Link / Base / Regular&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;16 / 150%&lt;/td&gt;
+            &lt;td&gt;Regular&lt;/td&gt;
+            &lt;td&gt;正文链接、页脚链接&lt;/td&gt;
+            &lt;td&gt;全站默认链接文本&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Link / Small / Regular&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;14 / 145%&lt;/td&gt;
+            &lt;td&gt;Regular&lt;/td&gt;
+            &lt;td&gt;面包屑、辅助链接&lt;/td&gt;
+            &lt;td&gt;不用于主 CTA&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Commerce / Price / Base&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;20 / 120%&lt;/td&gt;
+            &lt;td&gt;SemiBold&lt;/td&gt;
+            &lt;td&gt;商品售价&lt;/td&gt;
+            &lt;td&gt;价格样式独立于 Heading&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Commerce / Price / Sale&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;20 / 120%&lt;/td&gt;
+            &lt;td&gt;SemiBold&lt;/td&gt;
+            &lt;td&gt;促销价格&lt;/td&gt;
+            &lt;td&gt;Sale 颜色来自 Color Token&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Commerce / Badge / Base&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;12 / 120%&lt;/td&gt;
+            &lt;td&gt;SemiBold / Bold&lt;/td&gt;
+            &lt;td&gt;Sale、New、Hot、Limited&lt;/td&gt;
+            &lt;td&gt;使用 4–6% 字距，大写时更稳定&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Form / Input / Base&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;16 / 140%&lt;/td&gt;
+            &lt;td&gt;Regular&lt;/td&gt;
+            &lt;td&gt;输入框内容&lt;/td&gt;
+            &lt;td&gt;行高略低于正文，提高表单紧凑度&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Form / Helper / Base&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;12 或 13 / 140%&lt;/td&gt;
+            &lt;td&gt;Regular&lt;/td&gt;
+            &lt;td&gt;表单说明、帮助文本&lt;/td&gt;
+            &lt;td&gt;用于非错误状态&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;code&gt;Form / Error / Base&lt;/code&gt;&lt;/td&gt;
+            &lt;td&gt;12 或 13 / 140%&lt;/td&gt;
+            &lt;td&gt;Regular / Medium&lt;/td&gt;
+            &lt;td&gt;表单错误提示&lt;/td&gt;
+            &lt;td&gt;错误颜色由 Color Token 控制&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;05 · 字重使用规范&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;品牌气质偏自然、安静、轻高级，字重应控制在清晰但不过度压迫的范围内。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Weights&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;grid four&quot;&gt;
+        &lt;div class=&quot;component-card&quot;&gt;
+          &lt;h3&gt;&lt;span class=&quot;weight-dot&quot;&gt;&lt;/span&gt;Regular&lt;/h3&gt;
+          &lt;p&gt;用于 Body、Link、Caption、Helper。承担阅读和说明内容。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;component-card&quot;&gt;
+          &lt;h3&gt;&lt;span class=&quot;weight-dot&quot;&gt;&lt;/span&gt;Medium&lt;/h3&gt;
+          &lt;p&gt;用于 Label、Nav、小标题、表单标题。承担轻强调。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;component-card&quot;&gt;
+          &lt;h3&gt;&lt;span class=&quot;weight-dot&quot;&gt;&lt;/span&gt;SemiBold&lt;/h3&gt;
+          &lt;p&gt;用于 Display、Heading、Button、Price。承担主强调。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;component-card&quot;&gt;
+          &lt;h3&gt;&lt;span class=&quot;weight-dot&quot;&gt;&lt;/span&gt;ExtraBold&lt;/h3&gt;
+          &lt;p&gt;仅用于少量强品牌展示或促销视觉，不作为常规系统字重。&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div style=&quot;margin-top: 18px;&quot; class=&quot;note&quot;&gt;
+        &lt;strong&gt;执行规则：&lt;/strong&gt;同一组件内避免同时出现多个高字重。标题使用 SemiBold 时，正文和辅助信息应保持 Regular 或 Medium，形成清晰层级。
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;06 · 组件使用示例&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;文本样式应在真实组件中形成稳定组合。以下示例展示 Hero、导航、商品卡、价格、徽章和按钮的排版关系。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Preview&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;preview-area&quot;&gt;
+        &lt;div class=&quot;site-preview&quot;&gt;
+          &lt;div class=&quot;site-nav&quot;&gt;
+            &lt;div class=&quot;brandmark&quot;&gt;ATUNUS HOME&lt;/div&gt;
+            &lt;nav&gt;
+              &lt;a href=&quot;#&quot;&gt;Outdoor&lt;/a&gt;
+              &lt;a href=&quot;#&quot;&gt;Living&lt;/a&gt;
+              &lt;a href=&quot;#&quot;&gt;Sale&lt;/a&gt;
+            &lt;/nav&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;site-hero&quot;&gt;
+            &lt;div class=&quot;kicker&quot;&gt;New Season&lt;/div&gt;
+            &lt;h3&gt;Calm pieces for everyday outdoor living&lt;/h3&gt;
+            &lt;p&gt;Build a patio that feels relaxed, refined, and ready for every gathering.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;product-card&quot;&gt;
+          &lt;div class=&quot;product-img&quot;&gt;
+            &lt;div class=&quot;table-icon&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;product-body&quot;&gt;
+            &lt;div class=&quot;badge badge-text&quot;&gt;Sale&lt;/div&gt;
+            &lt;h4&gt;Minimal Patio Side Table&lt;/h4&gt;
+            &lt;p&gt;Lightweight metal frame with a durable powder-coated finish.&lt;/p&gt;
+            &lt;div class=&quot;prices&quot;&gt;
+              &lt;strong class=&quot;sale-price&quot;&gt;$56.00&lt;/strong&gt;
+              &lt;del&gt;$80.00&lt;/del&gt;
+            &lt;/div&gt;
+            &lt;button class=&quot;btn&quot;&gt;Add to cart&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&quot;responsive&quot;&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;07 · 响应式排版规格&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;移动端标题需要单独定义规格，不能直接等比缩放桌面端。正文和按钮应保持足够可读性与可点击性。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Responsive&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Style&lt;/th&gt;
+            &lt;th&gt;Desktop&lt;/th&gt;
+            &lt;th&gt;Mobile&lt;/th&gt;
+            &lt;th&gt;规则&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Display / 01&lt;/code&gt;&lt;/td&gt;&lt;td&gt;72 / 110%&lt;/td&gt;&lt;td&gt;44 / 110%&lt;/td&gt;&lt;td&gt;移动端 Hero 控制在 2–3 行&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Display / 02&lt;/code&gt;&lt;/td&gt;&lt;td&gt;56 / 112%&lt;/td&gt;&lt;td&gt;38 / 112%&lt;/td&gt;&lt;td&gt;用于专题页标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Heading / H1&lt;/code&gt;&lt;/td&gt;&lt;td&gt;48 / 116%&lt;/td&gt;&lt;td&gt;34 / 118%&lt;/td&gt;&lt;td&gt;页面主标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Heading / H2&lt;/code&gt;&lt;/td&gt;&lt;td&gt;40 / 120%&lt;/td&gt;&lt;td&gt;28 / 122%&lt;/td&gt;&lt;td&gt;Section 标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Heading / H3&lt;/code&gt;&lt;/td&gt;&lt;td&gt;32 / 125%&lt;/td&gt;&lt;td&gt;24 / 128%&lt;/td&gt;&lt;td&gt;模块标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Heading / H4&lt;/code&gt;&lt;/td&gt;&lt;td&gt;24 / 130%&lt;/td&gt;&lt;td&gt;22 / 130%&lt;/td&gt;&lt;td&gt;卡片标题与小模块标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Body / Large&lt;/code&gt;&lt;/td&gt;&lt;td&gt;18 / 150%&lt;/td&gt;&lt;td&gt;17 / 150%&lt;/td&gt;&lt;td&gt;移动端可略微降低字号&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Body / Base&lt;/code&gt;&lt;/td&gt;&lt;td&gt;16 / 150%&lt;/td&gt;&lt;td&gt;16 / 150%&lt;/td&gt;&lt;td&gt;正文不低于 16px&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Body / Small&lt;/code&gt;&lt;/td&gt;&lt;td&gt;14 / 145%&lt;/td&gt;&lt;td&gt;14 / 145%&lt;/td&gt;&lt;td&gt;辅助说明保持可读&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;Button / Base&lt;/code&gt;&lt;/td&gt;&lt;td&gt;16 / 120%&lt;/td&gt;&lt;td&gt;16 / 120%&lt;/td&gt;&lt;td&gt;按钮文本保持清晰&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;08 · Typography Tokens&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;Typography tokens 用于记录排版数值，帮助 Figma Variables、设计文档和前端实现保持一致。Text Styles 仍然是 Figma 内的主要使用入口。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Tokens&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Token&lt;/th&gt;
+            &lt;th&gt;Value&lt;/th&gt;
+            &lt;th&gt;关联样式&lt;/th&gt;
+            &lt;th&gt;说明&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--font-size-display-01&lt;/code&gt;&lt;/td&gt;&lt;td&gt;72px&lt;/td&gt;&lt;td&gt;Display / 01&lt;/td&gt;&lt;td&gt;桌面端首页大标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--line-height-display-01&lt;/code&gt;&lt;/td&gt;&lt;td&gt;110%&lt;/td&gt;&lt;td&gt;Display / 01&lt;/td&gt;&lt;td&gt;短标题行高&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--letter-spacing-display-01&lt;/code&gt;&lt;/td&gt;&lt;td&gt;-0.045em&lt;/td&gt;&lt;td&gt;Display / 01&lt;/td&gt;&lt;td&gt;大标题紧凑字距&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--font-size-heading-h1&lt;/code&gt;&lt;/td&gt;&lt;td&gt;48px&lt;/td&gt;&lt;td&gt;Heading / H1&lt;/td&gt;&lt;td&gt;页面标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--line-height-heading-h1&lt;/code&gt;&lt;/td&gt;&lt;td&gt;116%&lt;/td&gt;&lt;td&gt;Heading / H1&lt;/td&gt;&lt;td&gt;标题行高&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--font-size-body-base&lt;/code&gt;&lt;/td&gt;&lt;td&gt;16px&lt;/td&gt;&lt;td&gt;Body / Base&lt;/td&gt;&lt;td&gt;默认正文&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--line-height-body-base&lt;/code&gt;&lt;/td&gt;&lt;td&gt;150%&lt;/td&gt;&lt;td&gt;Body / Base&lt;/td&gt;&lt;td&gt;正文可读性&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--font-weight-regular&lt;/code&gt;&lt;/td&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Regular&lt;/td&gt;&lt;td&gt;正文、链接、说明&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--font-weight-medium&lt;/code&gt;&lt;/td&gt;&lt;td&gt;500&lt;/td&gt;&lt;td&gt;Medium&lt;/td&gt;&lt;td&gt;Label、导航、小标题&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;code&gt;--font-weight-semibold&lt;/code&gt;&lt;/td&gt;&lt;td&gt;600 / 650&lt;/td&gt;&lt;td&gt;SemiBold&lt;/td&gt;&lt;td&gt;标题、按钮、价格&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+      &lt;div style=&quot;margin-top: 20px;&quot; class=&quot;code-block&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* Typography tokens */&lt;/span&gt;
+&lt;span class=&quot;key&quot;&gt;:root&lt;/span&gt; {
+  &lt;span class=&quot;key&quot;&gt;--font-size-display-01&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;72px&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--line-height-display-01&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;110%&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--letter-spacing-display-01&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;-0.045em&lt;/span&gt;;
+
+  &lt;span class=&quot;key&quot;&gt;--font-size-heading-h1&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;48px&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--line-height-heading-h1&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;116%&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--letter-spacing-heading-h1&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;-0.04em&lt;/span&gt;;
+
+  &lt;span class=&quot;key&quot;&gt;--font-size-body-base&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;16px&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--line-height-body-base&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;150%&lt;/span&gt;;
+
+  &lt;span class=&quot;key&quot;&gt;--font-weight-regular&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;400&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--font-weight-medium&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;500&lt;/span&gt;;
+  &lt;span class=&quot;key&quot;&gt;--font-weight-semibold&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;600&lt;/span&gt;;
+}&lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&quot;usage&quot;&gt;
+      &lt;div class=&quot;section-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;09 · Figma 使用规则&lt;/h2&gt;
+          &lt;p class=&quot;section-desc&quot;&gt;以下规则用于设计协作、组件搭建和设计系统维护。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;tag&quot;&gt;Usage Rules&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;grid two&quot;&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;h3&gt;Text Style 不表达颜色&lt;/h3&gt;
+          &lt;p&gt;同一个文本样式可以搭配不同颜色。标题色、正文色、Sale 色、错误色均来自 Color Styles 或 Variables。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;h3&gt;Text Style 不表达状态&lt;/h3&gt;
+          &lt;p&gt;Hover、Active、Disabled、Selected 通过组件 Variant 或 Color Variables 表达，Text Style 只负责排版。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;h3&gt;链接使用 Link Component&lt;/h3&gt;
+          &lt;p&gt;Text Styles 定义 Link 的尺寸与字重；Underline、Icon、State、External 等属性通过 Link Component 管理。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;h3&gt;价格使用 Commerce 样式&lt;/h3&gt;
+          &lt;p&gt;商品价格、促销价、原价不复用 Heading。价格样式保持稳定，颜色和删除线由组件或 color token 控制。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;h3&gt;按钮文本使用 Button 样式&lt;/h3&gt;
+          &lt;p&gt;按钮文本不复用 Body 或 Label。按钮尺寸、状态和左右图标由 Button Component 的 Variant 与 Properties 管理。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;rule-card&quot;&gt;
+          &lt;h3&gt;正文保持可读性&lt;/h3&gt;
+          &lt;p&gt;正文默认使用 16 / 150%。长文本场景优先使用 Regular，避免过多 Medium 或 SemiBold。&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+      </div>
+    </section>
+
+    <div class="note">
+      说明：为了完整保留两个 HTML 的原始视觉与样式，本文件使用内嵌 iframe 合并。这样可以避免两个页面中的同名 class，例如 <code>.hero</code>、<code>.btn</code>、<code>.product-card</code> 互相覆盖。
+    </div>
+  </main>
+
+  <script>
+    function resizeIframe(frame) {
+      try {
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        const height = Math.max(
+          doc.body.scrollHeight,
+          doc.documentElement.scrollHeight,
+          doc.body.offsetHeight,
+          doc.documentElement.offsetHeight
+        );
+        frame.style.height = (height + 24) + "px";
+      } catch (error) {
+        frame.style.height = "1200px";
+      }
+    }
+
+    window.addEventListener("load", function () {
+      document.querySelectorAll("iframe").forEach(function (frame) {
+        resizeIframe(frame);
+        frame.addEventListener("load", function () {
+          resizeIframe(frame);
+          setTimeout(function () { resizeIframe(frame); }, 250);
+          setTimeout(function () { resizeIframe(frame); }, 1000);
+        });
+      });
+    });
+
+    window.addEventListener("resize", function () {
+      document.querySelectorAll("iframe").forEach(resizeIframe);
+    });
+  </script>
+</body>
+</html>
