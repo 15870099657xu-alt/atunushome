@@ -60,6 +60,26 @@
       assign hover_icon_image = default_icon_image
   endcase
 
+  assign default_icon_is_svg = false
+  if default_icon_type == 'custom_image'
+    assign default_icon_path = default_icon_image.src | downcase
+    assign default_icon_url = default_icon_image | image_url: width: 64
+    assign default_icon_url_downcase = default_icon_url | downcase
+    if default_icon_path contains '.svg' or default_icon_url_downcase contains '.svg'
+      assign default_icon_is_svg = true
+    endif
+  endif
+
+  assign hover_icon_is_svg = false
+  if hover_icon_type == 'custom_image'
+    assign hover_icon_path = hover_icon_image.src | downcase
+    assign hover_icon_url = hover_icon_image | image_url: width: 64
+    assign hover_icon_url_downcase = hover_icon_url | downcase
+    if hover_icon_path contains '.svg' or hover_icon_url_downcase contains '.svg'
+      assign hover_icon_is_svg = true
+    endif
+  endif
+
   assign has_icon = false
   if default_icon_type != 'none' or hover_icon_type != 'none'
     assign has_icon = true
@@ -98,10 +118,10 @@
             {% render 'icon', icon: icon_default_theme %}
           </svg>
         {% elsif default_icon_type == 'custom_image' %}
-          {% if default_icon_image.src contains '.svg' %}
+          {% if default_icon_is_svg %}
             <span
               class="button-block__icon-image button-block__icon-image--svg"
-              style="--button-icon-mask-image: url('{{ default_icon_image | image_url: width: 64 }}');"
+              style="--button-icon-mask-image: url('{{ default_icon_url }}');"
             ></span>
           {% else %}
             {{
@@ -122,10 +142,10 @@
             {% render 'icon', icon: icon_hover_theme %}
           </svg>
         {% elsif hover_icon_type == 'custom_image' %}
-          {% if hover_icon_image.src contains '.svg' %}
+          {% if hover_icon_is_svg %}
             <span
               class="button-block__icon-image button-block__icon-image--svg"
-              style="--button-icon-mask-image: url('{{ hover_icon_image | image_url: width: 64 }}');"
+              style="--button-icon-mask-image: url('{{ hover_icon_url }}');"
             ></span>
           {% else %}
             {{
@@ -201,7 +221,7 @@
   }
 
   .button-block__icon-image--svg {
-    background-color: currentColor;
+    background-color: var(--button-color, currentColor);
     -webkit-mask-image: var(--button-icon-mask-image);
     mask-image: var(--button-icon-mask-image);
     -webkit-mask-position: center;
