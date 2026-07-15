@@ -2,7 +2,18 @@
 {% liquid
   assign block_settings = block.settings
   assign button_icon = block_settings.icon | default: 'none'
-  assign lucide_icon = block_settings.lucide_icon | handleize
+  assign custom_icon = block_settings.custom_icon
+  assign custom_icon_is_svg = false
+
+  if custom_icon != blank
+    assign custom_icon_path = custom_icon.src | downcase
+    assign custom_icon_url = custom_icon | image_url: width: 64
+    assign custom_icon_url_downcase = custom_icon_url | downcase
+    if custom_icon_path contains '.svg' or custom_icon_url_downcase contains '.svg'
+      assign custom_icon_is_svg = true
+    endif
+  endif
+
   assign icon_position = block_settings.icon_position | default: 'after'
   assign button_height = block_settings.button_height | default: 48
 %}
@@ -30,21 +41,12 @@
   {% endif %}
   {{ block.shopify_attributes }}
 >
-  {% if lucide_icon != blank %}
-    <span class="button-block__icon">
-      <svg
-        class="button-block__icon-svg--lucide"
-        aria-hidden="true"
-        focusable="false"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <use href="{{ 'lucide-icons.svg' | asset_url }}#{{ lucide_icon }}"></use>
-      </svg>
+  {% if custom_icon_is_svg %}
+    <span class="button-block__icon" aria-hidden="true">
+      <span
+        class="button-block__icon-mask"
+        style="--button-custom-icon: url('{{ custom_icon_url }}');"
+      ></span>
     </span>
   {% elsif button_icon != 'none' %}
     <span class="button-block__icon">
@@ -86,9 +88,19 @@
     fill: currentColor;
   }
 
-  .button-block__icon svg.button-block__icon-svg--lucide {
-    fill: none;
-    stroke: currentColor;
+  .button-block__icon-mask {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    -webkit-mask-image: var(--button-custom-icon);
+    mask-image: var(--button-custom-icon);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
 {% endstylesheet %}
 
@@ -163,10 +175,10 @@
       "default": "none"
     },
     {
-      "type": "text",
-      "id": "lucide_icon",
-      "label": "Lucide icon name",
-      "info": "Search at https://lucide.dev/icons/ and enter the URL slug, for example: shopping-cart. This overrides the theme icon above."
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "Custom SVG icon",
+      "info": "SVG files only. Other image formats are ignored. This overrides the theme icon above."
     },
     {
       "type": "select",
@@ -183,7 +195,7 @@
         }
       ],
       "default": "after",
-      "visible_if": "{{ block.settings.icon != 'none' or block.settings.lucide_icon != blank }}"
+      "visible_if": "{{ block.settings.icon != 'none' or block.settings.custom_icon != blank }}"
     },
     {
       "type": "select",
