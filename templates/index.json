@@ -9,11 +9,12 @@
  */
 {
   "sections": {
-    "slideshow_UmpyXx": {
+    "slideshow_NdEGiq": {
       "type": "slideshow",
       "blocks": {
-        "slide_Mgckb7": {
+        "slide_zPzp4Y": {
           "type": "_slide",
+          "name": "t:names.slide",
           "settings": {
             "media_type_1": "image",
             "image_1": "shopify://shop_images/Banner.jpg",
@@ -24,9 +25,9 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 24,
+            "gap": 12,
             "background_color": "",
-            "toggle_overlay": false,
+            "toggle_overlay": true,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
@@ -36,11 +37,11 @@
             "padding-inline-end": 48
           },
           "blocks": {
-            "text_tG36Wp": {
+            "text_L7qYRN": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>From Concept to Home, <br/><em>All in Atunus.</em></p>",
+                "text": "<p>From Concept to Home, <br/>All in Atunus.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -51,7 +52,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.background }}",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -62,12 +63,12 @@
               },
               "blocks": {}
             },
-            "text_ENUeEj": {
+            "text_3qdmHM": {
               "type": "text",
               "settings": {
-                "text": "<p>Introducing our latest products, made especially for the season. Shop your favorites before they're gone!</p>",
+                "text": "<p>Creating a unified sense of order through curated collections and seamless spatial systems.</p>",
                 "width": "fit-content",
-                "max_width": "normal",
+                "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
@@ -76,30 +77,30 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.background }}",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 20,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
             },
-            "group_EcwqhT": {
+            "group_qjaWcC": {
               "type": "group",
-              "name": "按钮组",
+              "name": "t:names.buttons",
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "center",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
-                "width": "fill",
+                "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
@@ -127,18 +128,21 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "button_Hn7XMn": {
+                "button_Jxzjma": {
                   "type": "button",
-                  "name": "t:names.button",
+                  "name": "t:options.primary",
                   "settings": {
                     "label": "Shop now",
                     "link": "shopify://collections/all",
                     "open_in_new_tab": false,
+                    "icon": "arrow",
+                    "icon_position": "after",
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
                     "custom_button_border": "{{ settings.color_palette.background }}",
                     "link_text_color": "",
+                    "button_height": 48,
                     "width": "fit-content",
                     "custom_width": 100,
                     "width_mobile": "fit-content",
@@ -146,18 +150,21 @@
                   },
                   "blocks": {}
                 },
-                "button_RLd8An": {
+                "button_VRkaPD": {
                   "type": "button",
-                  "name": "t:names.button",
+                  "name": "t:options.secondary",
                   "settings": {
-                    "label": "Our Story",
+                    "label": "View all",
                     "link": "shopify://collections/all",
                     "open_in_new_tab": false,
+                    "icon": "arrow",
+                    "icon_position": "after",
                     "style_class": "button-secondary",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
                     "custom_button_border": "{{ settings.color_palette.background }}",
                     "link_text_color": "",
+                    "button_height": 48,
                     "width": "fit-content",
                     "custom_width": 100,
                     "width_mobile": "fit-content",
@@ -167,120 +174,20 @@
                 }
               },
               "block_order": [
-                "button_Hn7XMn",
-                "button_RLd8An"
+                "button_Jxzjma",
+                "button_VRkaPD"
               ]
             }
           },
           "block_order": [
-            "text_tG36Wp",
-            "text_ENUeEj",
-            "group_EcwqhT"
-          ]
-        },
-        "slide_wDGNMg": {
-          "type": "_slide",
-          "settings": {
-            "media_type_1": "image",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 24,
-            "background_color": "",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "padding-block-start": 48,
-            "padding-block-end": 48,
-            "padding-inline-start": 48,
-            "padding-inline-end": 48
-          },
-          "blocks": {
-            "text_tBEBjX": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<p>From Concept to Home, <br/><em>All in Atunus.</em></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-subheading--family)",
-                "font_size": "4.5rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.background }}",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_999EfD": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Introducing our latest products, made especially for the season. Shop your favorites before they're gone!</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.background }}",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_xwTbbQ": {
-              "type": "button",
-              "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_tBEBjX",
-            "text_999EfD",
-            "button_xwTbbQ"
+            "text_L7qYRN",
+            "text_3qdmHM",
+            "group_qjaWcC"
           ]
         }
       },
       "block_order": [
-        "slide_Mgckb7",
-        "slide_wDGNMg"
+        "slide_zPzp4Y"
       ],
       "name": "t:names.slideshow_full_frame",
       "settings": {
@@ -289,13 +196,13 @@
         "full_frame_on_mobile": false,
         "slideshow_gap": 12,
         "corner_radius": 0,
-        "slide_height": "large",
+        "slide_height": "medium",
         "content_position": "on-media",
         "background_color": "",
         "icons_style": "arrows_large",
-        "icons_shape": "none",
+        "icons_shape": "circle",
         "slideshow_controls_style": "dots",
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_speed": 4,
         "padding-block-start": 0,
         "padding-block-end": 0
@@ -502,7 +409,7 @@
     }
   },
   "order": [
-    "slideshow_UmpyXx",
+    "slideshow_NdEGiq",
     "product_list_fa6P9H"
   ]
 }
