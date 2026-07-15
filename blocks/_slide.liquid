@@ -1,8 +1,15 @@
 
 
-{% assign block_settings = block.settings %}
-{%- assign block_index = section.blocks | find_index: 'id', block.id -%}
-{%- assign section_index = section.index -%}
+{% liquid
+  assign block_settings = block.settings
+  assign block_index = section.blocks | find_index: 'id', block.id
+  assign section_index = section.index
+  assign slide_content_alignment = block_settings.horizontal_alignment
+
+  if block_settings.content_direction == 'column'
+    assign slide_content_alignment = block_settings.horizontal_alignment_flex_direction_column
+  endif
+%}
 
 {% capture children %}
   {% liquid
@@ -102,7 +109,7 @@
     {%- endif -%}
   </div>
   <div
-    class="spacing-style slide__content {{ class }}{% if preview_image or block_settings.toggle_overlay %} background-transparent{% endif %}"
+    class="spacing-style slide__content slide__content--align-{{ slide_content_alignment }} {{ class }}{% if preview_image or block_settings.toggle_overlay %} background-transparent{% endif %}"
     style="{% render 'spacing-style', settings: block_settings %}"
     {{ block.shopify_attributes }}
   >
@@ -146,7 +153,81 @@
   }
 
   .slide__content > * {
-    margin: auto;
+    margin-block: auto;
+  }
+
+  .slide__content--align-flex-start > * {
+    margin-inline: 0 auto;
+  }
+
+  .slide__content--align-center > * {
+    margin-inline: auto;
+  }
+
+  .slide__content--align-flex-end > * {
+    margin-inline: auto 0;
+  }
+
+  .slide__content--align-center > .group-block-content {
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .slide__content--align-center > .group-block-content > .group-block {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .slide__content--align-center > .group-block-content > .group-block--width-fit {
+    width: fit-content;
+  }
+
+  .slide__content .group-block-content[style*='--horizontal-alignment: center'] {
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .slide__content .group-block-content[style*='--horizontal-alignment: center'] > :is(.group-block, .text-block) {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .slide__content .group-block-content[style*='--horizontal-alignment: center'] > .group-block--width-fit {
+    width: fit-content;
+  }
+
+  .slide__content .group-block-content[style*='--horizontal-alignment: center'] > .text-block {
+    --text-align-default: center;
+
+    align-items: center;
+  }
+
+  .slide__content .group-block-content[style*='--horizontal-alignment: center'] > .text-block > * {
+    margin-inline: auto;
+  }
+
+  .slide__content
+    .group-block-content[style*='--horizontal-alignment: center']
+    > :is(.button-block, .button, .button-secondary, .button-custom) {
+    margin-inline: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .slide__content .layout-panel-flex--row[style*='--horizontal-alignment: center'] {
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .slide__content .layout-panel-flex--row:not(.mobile-column)[style*='--horizontal-alignment: center'] {
+      justify-content: center;
+    }
+  }
+
+  .slideshow--content-on-media .slide__content .text-block:not([style*='--color:']) {
+    --color: var(--color-text-inverse, var(--palette-lightest));
   }
 
   .slide__content.background-transparent {

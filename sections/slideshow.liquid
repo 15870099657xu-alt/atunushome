@@ -36,6 +36,8 @@
   endif
 
   assign slideshow_class = 'slideshow--content-' | append: section.settings.content_position
+  assign arrow_style = section.settings.arrow_style | default: 'circle'
+  assign slideshow_class = slideshow_class | append: ' slideshow--arrow-style-' | append: arrow_style
   if section.blocks.size == 1
     assign slideshow_class = slideshow_class | append: ' slideshow--single-media'
   endif
@@ -178,6 +180,58 @@
         pointer-events: none;
       }
     }
+
+    slideshow-arrows .slideshow-control {
+      transition:
+        opacity 180ms ease,
+        visibility 180ms ease,
+        background-color 180ms ease;
+    }
+
+    @media screen and (min-width: 750px) {
+      slideshow-arrows .slideshow-control {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .slideshow--arrow-style-circle slideshow-arrows .slideshow-control,
+    .slideshow--arrow-style-rounded slideshow-arrows .slideshow-control {
+      border: 1px solid rgb(var(--color-white-rgb) / var(--opacity-50));
+      background-color: var(--color-overlay);
+      color: var(--color-text-inverse);
+      backdrop-filter: blur(8px);
+    }
+
+    .slideshow--arrow-style-circle slideshow-arrows .slideshow-control {
+      border-radius: var(--radius-pill);
+    }
+
+    .slideshow--arrow-style-rounded slideshow-arrows .slideshow-control {
+      border-radius: var(--radius-sm);
+    }
+
+    .slideshow--arrow-style-minimal slideshow-arrows .slideshow-control {
+      border: 0;
+      border-radius: 0;
+      background-color: transparent;
+      color: var(--color-text-inverse);
+      backdrop-filter: none;
+    }
+
+    @media screen and (min-width: 750px) and (hover: hover) and (pointer: fine) {
+      slideshow-arrows .slideshow-control {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      slideshow-component:is(:hover, :focus-within) > slideshow-container > slideshow-arrows .slideshow-control {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
   }
 
   .slideshow-section--hero {
@@ -189,11 +243,6 @@
     slideshow-slide {
       width: 100%;
       min-width: 0;
-    }
-
-    slideshow-slides,
-    slideshow-slide {
-      min-height: 800px;
     }
 
     .slide__image-container,
@@ -212,37 +261,24 @@
     }
 
     .slide__content {
-      display: grid;
-      place-items: center;
       padding-inline: clamp(var(--padding-lg), 6vw, 6rem);
       padding-block: clamp(6rem, 12vh, 9rem);
     }
 
     .slide__content > .group-block-content {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, auto));
-      align-content: center;
-      justify-content: center;
-      justify-items: center;
       width: min(72rem, 100%);
       height: auto;
       gap: clamp(var(--gap-sm), 2vw, var(--gap-lg));
-      margin: auto;
-      text-align: center;
     }
 
     .slide__content > .group-block-content > .text-block {
-      grid-column: 1 / -1;
       width: 100%;
       max-width: 48rem;
-      align-items: center;
-      text-align: center;
     }
 
     .slide__content > .group-block-content > .text-block > * {
       width: 100%;
       max-inline-size: 100%;
-      text-align: center;
     }
 
     .slide__content
@@ -262,12 +298,6 @@
       min-height: 3rem;
     }
 
-    .slide__content
-      > .group-block-content
-      > .size-style:is(.button, .button-secondary, .button-custom):only-of-type {
-      grid-column: 1 / -1;
-    }
-
     slideshow-arrows {
       mix-blend-mode: normal;
     }
@@ -279,10 +309,6 @@
       min-height: var(--minimum-touch-target);
       margin-inline: clamp(var(--padding-md), 3vw, 3rem);
       padding: 0;
-      border: 1px solid rgb(var(--color-white-rgb) / var(--opacity-50));
-      border-radius: var(--radius-pill);
-      color: var(--color-text-inverse);
-      opacity: 1;
     }
 
     slideshow-controls[controls-on-media] {
@@ -307,11 +333,6 @@
     }
 
     @media screen and (min-width: 750px) and (max-width: 989px) {
-      slideshow-slides,
-      slideshow-slide {
-        min-height: min(800px, 100svh);
-      }
-
       .slide__content {
         padding-inline: clamp(2.5rem, 6vw, 4rem);
         padding-block: clamp(6rem, 12vh, 8rem);
@@ -327,24 +348,14 @@
     }
 
     @media screen and (max-width: 749px) {
-      slideshow-slides,
-      slideshow-slide {
-        min-height: 100svh;
-      }
-
       .slide__content {
         padding: clamp(5rem, 12vh, 7rem) var(--padding-lg);
       }
 
       .slide__content > .group-block-content {
-        grid-template-columns: minmax(0, 1fr);
         width: 100%;
         max-width: 32rem;
         gap: var(--gap-md);
-      }
-
-      .slide__content > .group-block-content > * {
-        grid-column: 1;
       }
 
       .slide__content
@@ -548,6 +559,27 @@
         }
       ],
       "default": "none",
+      "visible_if": "{{ section.settings.icons_style != 'none' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrow_style",
+      "label": "Arrow style",
+      "options": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "rounded",
+          "label": "Rounded square"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimal"
+        }
+      ],
+      "default": "circle",
       "visible_if": "{{ section.settings.icons_style != 'none' }}"
     },
     {
