@@ -1,0 +1,310 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div
+  class="service-highlights-section section section--page-width"
+  {{ section.shopify_attributes }}
+>
+  <div
+    class="service-highlights color-custom-{{ section.id }} spacing-style"
+    style="
+      {% render 'spacing-style', settings: section.settings %}
+      --service-highlights-radius: {{ section.settings.border_radius }}px;
+      --service-highlights-gap: {{ section.settings.gap }}px;
+    "
+  >
+    <div class="service-highlights__grid">
+      {% for block in section.blocks %}
+        <article
+          class="service-highlights__item"
+          style="
+            --service-icon-background: {{ block.settings.icon_background }};
+            --service-icon-color: {{ block.settings.icon_color }};
+            --service-icon-size: {{ block.settings.icon_size }}px;
+            --service-icon-box-size: {{ block.settings.icon_box_size }}px;
+            {% if block.settings.icon != blank %}
+              --service-icon-image: url({{ block.settings.icon | image_url: width: 256 }});
+            {% endif %}
+          "
+          {{ block.shopify_attributes }}
+        >
+          <div class="service-highlights__icon-box" aria-hidden="true">
+            {% if block.settings.icon != blank %}
+              <span class="service-highlights__uploaded-icon"></span>
+            {% else %}
+              <svg
+                class="service-highlights__fallback-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                {% case forloop.index %}
+                  {% when 1 %}
+                    <path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M18 19h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5a2 2 0 0 1-2 2ZM6 19H5a2 2 0 0 1-2-2v-5h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2Z"/>
+                  {% when 2 %}
+                    <path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>
+                  {% when 3 %}
+                    <path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 8v8l9 5 9-5V8M12 13v8"/>
+                  {% when 4 %}
+                    <path d="M12 3 5 6v5c0 4.8 2.8 8.2 7 10 4.2-1.8 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>
+                  {% else %}
+                    <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>
+                {% endcase %}
+              </svg>
+            {% endif %}
+          </div>
+
+          <div class="service-highlights__content">
+            {% if block.settings.title != blank %}
+              <h3 class="service-highlights__title">{{ block.settings.title | escape }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="service-highlights__text">{{ block.settings.text | escape | newline_to_br }}</div>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .service-highlights {
+    width: 100%;
+    padding-inline: clamp(16px, 3vw, 40px);
+    overflow: hidden;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    border-radius: var(--service-highlights-radius);
+  }
+
+  .service-highlights__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--service-highlights-gap);
+  }
+
+  .service-highlights__item {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .service-highlights__icon-box {
+    display: grid;
+    width: var(--service-icon-box-size);
+    height: var(--service-icon-box-size);
+    flex: 0 0 var(--service-icon-box-size);
+    place-items: center;
+    color: var(--service-icon-color);
+    background-color: var(--service-icon-background);
+    border-radius: var(--style-border-radius-sm, 8px);
+  }
+
+  .service-highlights__uploaded-icon,
+  .service-highlights__fallback-icon {
+    display: block;
+    width: var(--service-icon-size);
+    height: var(--service-icon-size);
+  }
+
+  .service-highlights__uploaded-icon {
+    background-color: var(--service-icon-color);
+    -webkit-mask: var(--service-icon-image) center / contain no-repeat;
+    mask: var(--service-icon-image) center / contain no-repeat;
+  }
+
+  .service-highlights__content {
+    min-width: 0;
+  }
+
+  .service-highlights__title {
+    margin: 0;
+    color: var(--color-foreground);
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--xl);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    line-height: 1.3;
+  }
+
+  .service-highlights__text {
+    margin-block-start: 8px;
+    color: var(--color-foreground-muted);
+    font-size: var(--font-size--sm);
+    line-height: 1.45;
+  }
+
+  @media screen and (min-width: 750px) {
+    .service-highlights__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .service-highlights__item {
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.icons_with_text",
+  "tag": "section",
+  "class": "service-highlights-wrapper",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service_item",
+      "name": "Service item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:settings.icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings.title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:settings.text"
+        },
+        {
+          "type": "color",
+          "id": "icon_background",
+          "label": "t:settings.icon_background",
+          "default": "#e9e9e2"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "t:settings.color",
+          "default": "#747b68"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "t:settings.size",
+          "min": 12,
+          "max": 48,
+          "step": 1,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "icon_box_size",
+          "label": "Icon box size",
+          "min": 32,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.icons_with_text",
+      "category": "t:categories.text",
+      "blocks": [
+        {
+          "type": "service_item",
+          "settings": {
+            "title": "1-1 Customer Service",
+            "text": "Personal support before and after purchases."
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "title": "Local Delivery Team",
+            "text": "Coordinated delivery handled close to home."
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "title": "Drop Down and Unboxing",
+            "text": "Furniture placed, opened, and ready to enjoy."
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "title": "5-Year Warranty",
+            "text": "Long-term confidence for daily family use."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
